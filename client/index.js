@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 
 const knnClassifier = ml5.KNNClassifier();
+
 let poseNet;
 let poses = [{pose:{
   "score": 0.32371445304906,
@@ -150,7 +151,7 @@ function addExample(label) {
   // Convert poses results to a 2d array [[score0, x0, y0],...,[score16, x16, y16]]
   const poseArray = poses[0].pose.keypoints.map(p => [p.score, p.position.x, p.position.y]);
   // Add an example with a label to the classifier
-  //knnClassifier.addExample(poseArray, label);
+  knnClassifier.addExample(poseArray, label);
 
 }
 // Predict the current frame.
@@ -171,6 +172,7 @@ function classify() {
 }
 
 function gotResults(err, result) {
+
   // Display any error
   if (err) {
     console.error(err);
@@ -195,7 +197,7 @@ function sample(){
   // })
 }
 
-sample()
+
 
 ReactDOM.render(
   <div>Hello, world!</div>,
