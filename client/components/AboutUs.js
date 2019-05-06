@@ -20,7 +20,7 @@ const AboutUs = () => {
             placeat?
             <ul className="card-actions">
               <li>
-                <button className="button-primary">Only 1 Action</button>
+                <button className="button-warning">Only 1 Action</button>
               </li>
             </ul>
           </div>
@@ -40,7 +40,7 @@ const AboutUs = () => {
             placeat?
             <ul className="card-actions">
               <li>
-                <button className="button-primary">Only 1 Action</button>
+                <button className="button-warning">Only 1 Action</button>
               </li>
             </ul>
           </div>
@@ -60,7 +60,7 @@ const AboutUs = () => {
             placeat?
             <ul className="card-actions">
               <li>
-                <button className="button-primary">Only 1 Action</button>
+                <button className="button-warning">Only 1 Action</button>
               </li>
             </ul>
           </div>
@@ -80,7 +80,7 @@ const AboutUs = () => {
             placeat?
             <ul className="card-actions">
               <li>
-                <button className="button-primary">Only 1 Action</button>
+                <button className="button-warning">Only 1 Action</button>
               </li>
             </ul>
           </div>
