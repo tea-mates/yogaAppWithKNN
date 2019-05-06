@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AboutUs() {
+const AboutUs = () => {
   return (
     <div className="row">
       <div className="align-center">
@@ -41,6 +41,6 @@ function AboutUs() {
       </div>
     </div>
   );
-}
+};
 
 export default AboutUs;
