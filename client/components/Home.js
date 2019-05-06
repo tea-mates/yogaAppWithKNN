@@ -21,6 +21,8 @@ class Home extends React.Component {
           <Link to="/start">
             <button className="button-warning">Start!</button>
           </Link>
+          <br />
+          **Please allow the camera access**
         </div>
       </div>
     );

@@ -7,7 +7,7 @@ import { Navbar } from './components/Navbar.js';
 
 const App = () => {
   return (
-    <div>
+    <div className="align-center">
       <Navbar />
       <Routes />
     </div>
