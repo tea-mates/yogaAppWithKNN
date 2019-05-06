@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class WelcomePage extends React.Component {
+class Home extends React.Component {
   constructor() {
     super();
   }
@@ -27,4 +27,4 @@ class WelcomePage extends React.Component {
   }
 }
 
-export default WelcomePage;
+export default Home;
