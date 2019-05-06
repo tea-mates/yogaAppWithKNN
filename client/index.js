@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, HashRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import Root from './root';
 
 ReactDOM.render(
   // // place holder for when the store has been setup
-  // <Provider>
+  // <Provider store={store}>
   // <HashRouter>
   //   <Root />
   // </HashRouter>

@@ -4,7 +4,7 @@ import WelcomePage from './components/WelcomePage';
 
 const Root = () => {
   return (
-    <div>
+    <div className="align-center">
       <main>
         <div>
           {/* placeholder for the navbar component */}
