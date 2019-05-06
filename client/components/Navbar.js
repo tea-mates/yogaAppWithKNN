@@ -5,11 +5,11 @@ export const Navbar = props => {
   return (
     <div>
       <nav>
-        <div class="nav-container">
-          <div class="nav-logo">
+        <div className="nav-container">
+          <div className="nav-logo">
             <img src="../../public/lotus-flower " />
           </div>
-          <ul class="nav-links">
+          <ul className="nav-links">
             <li>
               <Link to="/aboutus">About</Link>
             </li>
