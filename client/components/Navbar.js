@@ -7,7 +7,10 @@ export const Navbar = props => {
       <nav>
         <div className="nav-container">
           <div className="nav-logo">
-            <img src="../../public/lotus-flower " />
+            <img
+              className="nav-logo"
+              src="https://cdn.xl.thumbs.canstockphoto.com/logo-for-yoga-eps-vector_csp15097480.jpg"
+            />
           </div>
           <ul className="nav-links">
             <li>
