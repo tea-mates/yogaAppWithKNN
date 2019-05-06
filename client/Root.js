@@ -1,17 +1,18 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
-import WelcomePage from './WelcomePage';
+import Routes from './routes';
+import WelcomePage from './components/WelcomePage';
 
 const Root = () => {
   return (
-    <Router>
-      <div>
-        <NavBar />
-        <main>
-          <Route exact path="/" component={WelcomePage} />
-        </main>
-      </div>
-    </Router>
+    <div>
+      <main>
+        <div>
+          {/* placeholder for the navbar component */}
+          {/* <Navbar /> */}
+          <Routes />
+        </div>
+      </main>
+    </div>
   );
 };
 
