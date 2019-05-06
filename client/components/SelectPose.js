@@ -12,9 +12,6 @@ class SelectPose extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <Navbar />
-        </div>
         <table>
           <tbody>
             {this.state.poses.map((pose, i) => {

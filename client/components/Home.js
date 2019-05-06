@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class WelcomePage extends React.Component {
+class Home extends React.Component {
   constructor() {
     super();
   }
@@ -21,10 +21,12 @@ class WelcomePage extends React.Component {
           <Link to="/start">
             <button className="button-warning">Start!</button>
           </Link>
+          <br />
+          **Please allow the camera access**
         </div>
       </div>
     );
   }
 }
 
-export default WelcomePage;
+export default Home;
