@@ -6,28 +6,28 @@ import { Navbar } from './Navbar';
 class SelectPose extends React.Component {
   constructor() {
     super();
+    this.state = {
+      poses: ['Namaste', 'Tree'],
+    };
   }
   render() {
     return (
       <div>
-        <Navbar />
+        <div>
+          <Navbar />
+        </div>
         <table>
-          <thead>
-            <th>
-              <Camera />
-            </th>
-            <th>
-              <tr>
-                <Button buttonName="Pose 1" />
-              </tr>
-              <tr>
-                <Button buttonName="Pose 2" />
-              </tr>
-              <tr>
-                <Button buttonName="Pose 3" />
-              </tr>
-            </th>
-          </thead>
+          <tbody>
+            {this.state.poses.map((pose, i) => {
+              return (
+                <tr key={i}>
+                  <td>
+                    <Button buttonName={pose} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
     );
