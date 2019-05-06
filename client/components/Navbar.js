@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const Button = props => {
+export const Navbar = props => {
   return (
     <div>
       <nav>
@@ -11,10 +11,10 @@ export const Button = props => {
           </div>
           <ul class="nav-links">
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/aboutus">About</Link>
             </li>
             <li>
-              <Link to="/welcome">Home</Link>
+              <Link to="/">Home</Link>
             </li>
           </ul>
         </div>
