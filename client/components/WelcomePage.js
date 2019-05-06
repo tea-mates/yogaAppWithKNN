@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Navbar } from './Navbar';
 
 class WelcomePage extends React.Component {
   constructor() {
@@ -8,6 +10,7 @@ class WelcomePage extends React.Component {
   render() {
     return (
       <div>
+        <Navbar />
         <div>
           <h1>Product Name</h1>
         </div>
@@ -17,7 +20,9 @@ class WelcomePage extends React.Component {
         </div>
         <br />
         <div>
-          <button className="button-warning">Start!</button>
+          <Link to="/start">
+            <button className="button-warning">Start!</button>
+          </Link>
         </div>
       </div>
     );
