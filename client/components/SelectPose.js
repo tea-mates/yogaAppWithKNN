@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from './Buttons';
 import Camera from './Camera';
-import { Navbar } from './Navbar';
 
 class SelectPose extends React.Component {
   constructor() {
