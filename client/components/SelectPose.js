@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from './Buttons';
 import Camera from './Camera';
-import 
+import Navbar from './Navbar';
 
 class SelectPose extends React.Component {
   constructor() {
@@ -11,8 +11,9 @@ class SelectPose extends React.Component {
     return (
       <table>
         <thead>
-          <Navbar/>
+          <Navbar />
         </thead>
+        <tbody>
           <th>
             <Camera />
           </th>
@@ -27,7 +28,7 @@ class SelectPose extends React.Component {
               <Button buttonName="Pose 3" />
             </tr>
           </th>
-
+        </tbody>
       </table>
     );
   }

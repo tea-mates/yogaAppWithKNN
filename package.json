@@ -9,10 +9,13 @@
     "express": "^4.16.4",
     "history": "^4.6.3",
     "morgan": "^1.9.1",
+    "mustard-ui": "0.0.8",
     "nodemon": "^1.19.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.0"
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^5.0.0",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

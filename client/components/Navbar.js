@@ -7,7 +7,7 @@ export const Button = props => {
       <nav>
         <div class="nav-container">
           <div class="nav-logo">
-            <a href="/">mustard</a>
+            <img src="../../public/lotus-flower " />
           </div>
           <ul class="nav-links">
             <li>

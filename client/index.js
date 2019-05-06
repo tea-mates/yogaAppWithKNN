@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { HashRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import Root from './root';
 
 import { Router } from 'react-router-dom';
 import history from './history';
