@@ -6,9 +6,57 @@ const mountainPoseSamples =
 
 let mountainPoseArrayOfUrls = imgScraperLister(mountainPoseSamples);
 
-const idxToRemove = [];
+const idxToRemove = [
+  2,
+  9,
+  10,
+  11,
+  12,
+  16,
+  17,
+  18,
+  19,
+  21,
+  23,
+  27,
+  30,
+  31,
+  35,
+  38,
+  39,
+  41,
+  44,
+  45,
+  46,
+  48,
+  49,
+  50,
+  52,
+  53,
+  55,
+  60,
+  62,
+  65,
+  68,
+  70,
+  71,
+  72,
+  73,
+  76,
+  81,
+  83,
+  84,
+  86,
+  91,
+  92,
+  93,
+  96,
+  97,
+  98,
+  100
+];
 
 const mountainPoseUrls = deleteBadImgData(idxToRemove, mountainPoseArrayOfUrls);
 
-export default mountainPoseArrayOfUrls;
-// export default mountainPoseUrls;
+// export default mountainPoseArrayOfUrls;
+export default mountainPoseUrls;
