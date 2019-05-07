@@ -2,6 +2,8 @@ import { drawKeyPoints, drawSkeleton } from './utils';
 import React, { Component } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
 
+export let video;
+
 class PoseNet extends Component {
   static defaultProps = {
     //video sizing variables
@@ -64,7 +66,7 @@ class PoseNet extends Component {
       );
     }
     const { videoWidth, videoHeight } = this.props;
-    const video = this.video;
+    video = this.video;
     video.width = videoWidth;
     video.height = videoHeight;
 
@@ -118,7 +120,7 @@ class PoseNet extends Component {
     } = this.props;
 
     const posenetModel = this.posenet;
-    const video = this.video;
+    video = this.video;
 
     const findPoseDetectionFrame = async () => {
       let poses = [];

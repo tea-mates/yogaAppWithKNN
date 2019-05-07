@@ -1,16 +1,29 @@
 
+import {video} from './components/Camera'
+import pose from './posenetData'
+
 const knnClassifier = ml5.KNNClassifier();
+
+
 
 let poseNet;
 let poses = [];
+export let yoga;
 
-function addExample(label) {
-
-  const poseArray = poses[0].pose.keypoints.map(p => [p.score, p.position.x, p.position.y]);
-
-  knnClassifier.addExample(poseArray, label);
-
+function setup(){
+  poseNet = ml5.poseNet(video, modelReady);
+  poseNet.on('pose', function(results) {
+    poses = results;
+  });
 }
+
+// function addExample(label) {
+
+//   const poseArray = poses[0].pose.keypoints.map(p => [p.score, p.position.x, p.position.y]);
+
+//   knnClassifier.addExample(poseArray, label);
+
+// }
 // Predict the current frame.
 function classify() {
 
@@ -39,13 +52,16 @@ function gotResults(err, result) {
   if (result.confidencesByLabel) {
     const confidences = result.confidencesByLabel;
     // result.label is the label that has the highest confidence
+    console.log(result);
     if (result.label) {
-      select('#result').html(result.label);
-      select('#confidence').html(`${confidences[result.label] * 100} %`);
+      // select('#result').html(result.label);
+      // select('#confidence').html(`${confidences[result.label] * 100} %`);
+      yoga = result.label
+
     }
 
-    select('#confidenceA').html(`${confidences['A'] ? confidences['A'] * 100 : 0} %`);
-    select('#confidenceB').html(`${confidences['B'] ? confidences['B'] * 100 : 0} %`);
+    // select('#confidenceA').html(`${confidences['A'] ? confidences['A'] * 100 : 0} %`);
+    // select('#confidenceB').html(`${confidences['B'] ? confidences['B'] * 100 : 0} %`);
   }
 
   classify();
@@ -54,8 +70,8 @@ function gotResults(err, result) {
 
 //adding our sample
 
-function sample(){
+// function sample(){
 
-    addExample('Namaste')
+//     addExample('Tree Pose')
 
-}
+// }
