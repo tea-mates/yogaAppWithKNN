@@ -1,3 +1,14 @@
+.aboutUsImage {
+  width: 100;
+  height: 100px;
+}
+
+#aboutUsDiv {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .webcam {
   margin: 0 auto;
   margin-left: auto;
@@ -11,4 +22,9 @@
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   display: none !important;
+}
+
+.nav-logo {
+  max-width: 60px;
+  max-height: 60px;
 }

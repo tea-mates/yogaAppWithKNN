@@ -228,7 +228,7 @@ class PoseNet extends Component {
 
     return (
       <div>
-        {/* {console.log(this.state)} */}
+
         <div>
           <video id="videoNoShow" playsInline ref={this.getVideo} />
           <canvas className="webcam" ref={this.getCanvas} />
