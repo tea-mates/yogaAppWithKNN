@@ -2,6 +2,10 @@ import { drawKeyPoints, drawSkeleton } from './utils';
 import React, { Component } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
 
+
+//export let video;
+let result = '';
+let confidence = 0
 class PoseNet extends Component {
   static defaultProps = {
     //video sizing variables
@@ -25,6 +29,11 @@ class PoseNet extends Component {
 
   constructor(props) {
     super(props, PoseNet.defaultProps);
+    this.state = {
+      result:'',
+      confidence:0
+    }
+    this.poseDetectionFrame = this.poseDetectionFrame.bind(this)
   }
 
   getCanvas = elem => {
@@ -137,6 +146,9 @@ class PoseNet extends Component {
           break;
         }
         case 'single-pose': {
+          const knnClassifier = ml5.KNNClassifier();
+
+          //let poseNetml = ml5.poseNet(video, knnClassifier);
           const pose = await posenetModel.estimateSinglePose(
             video,
             imageScaleFactor,
@@ -144,10 +156,34 @@ class PoseNet extends Component {
             outputStride
           );
           poses.push(pose);
-          break;
-        }
-      }
+          //console.log('hello')
+          knnClassifier.load('/myKNN.json',classify)
 
+          async function classify() {
+            //console.log('hellow')
+            const numLabels = knnClassifier.getNumLabels();
+            if (numLabels <= 0) {
+              console.error('There is no examples in any label');
+              return;
+            }
+
+            const poseArray = poses[0].keypoints.map(p => [p.score, p.position.x, p.position.y]);
+
+            let resultModel = await knnClassifier.classify(poseArray)
+            function gotResults(resultModel) {
+              result = ''
+              confidence = 0
+
+              result = resultModel.label
+              confidence = resultModel.confidencesByLabel[result]
+              console.log(`here ${result} ${confidence}`)
+          }
+          gotResults(resultModel)
+
+        }
+        break;
+      }
+    }
       canvasContext.clearRect(0, 0, videoWidth, videoHeight);
 
       if (showVideo) {
@@ -182,14 +218,22 @@ class PoseNet extends Component {
       requestAnimationFrame(findPoseDetectionFrame);
     };
     findPoseDetectionFrame();
+    this.setState({
+      result:result,
+      confidence:confidence
+    })
   }
 
   render() {
+
     return (
       <div>
+
         <div>
           <video id="videoNoShow" playsInline ref={this.getVideo} />
           <canvas className="webcam" ref={this.getCanvas} />
+          <p id='result'>{this.state.result}</p>
+          <p id='confidence'>{this.state.confidence}</p>
         </div>
       </div>
     );
