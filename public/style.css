@@ -28,3 +28,20 @@
   max-width: 60px;
   max-height: 60px;
 }
+
+#results{
+  text-align: center;
+}
+
+#resultsContent{
+  width: 75%;
+  display: inline-block;
+}
+
+#resultHeading{
+  padding: 30px;
+}
+
+.progress-bar{
+  margin: 60 0 60 0;
+}
