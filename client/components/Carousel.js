@@ -47,7 +47,6 @@ class PoseCarousel extends React.Component {
           activeIndex={index}
           direction={direction}
           onSelect={this.handleSelect}
-          interval={false}
         >
           {poses.map((pose, i) => {
             return (
