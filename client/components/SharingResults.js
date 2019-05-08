@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class CountdownTimer extends React.Component {
+export default class SharingResults extends React.Component {
   constructor(props) {
     super(props);
   }
