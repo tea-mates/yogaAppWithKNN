@@ -28,3 +28,12 @@
   max-width: 60px;
   max-height: 60px;
 }
+
+.carousel {
+  justify-content: center;
+}
+
+.carouselImage {
+  width: 400px;
+  height: 400px;
+}
