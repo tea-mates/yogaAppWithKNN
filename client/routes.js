@@ -4,6 +4,7 @@ import Home from './components/Home';
 import AboutUs from './components/AboutUs';
 import SelectPose from './components/SelectPose';
 import SinglePose from './components/SinglePose';
+import Result from './components/ResultPage';
 
 const Routes = () => {
   return (
@@ -13,6 +14,7 @@ const Routes = () => {
       <Route exact path="/start" component={SelectPose} />
       <Route exact path="/Namaste" component={SinglePose} />
       <Route exact path="/Tree" component={SinglePose} />
+      <Route exact path="/result" component={Result} />
     </Switch>
   );
 };
