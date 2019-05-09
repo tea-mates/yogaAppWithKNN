@@ -1,7 +1,7 @@
 import { drawKeyPoints, drawSkeleton } from './utils';
 import React, { Component } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
-import dummy from './posenetData';
+//import dummy from './posenetData';
 
 //export let video;
 let result = '';
