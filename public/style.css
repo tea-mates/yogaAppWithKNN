@@ -37,3 +37,25 @@
   width: 400px;
   height: 400px;
 }
+
+.posesImage {
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+}
+
+.allPosesDiv {
+  position: absolute;
+  top: 350px;
+}
+
+.countdownDiv {
+  position: relative;
+  top: 100px;
+}
+
+.timerDiv {
+  position: absolute;
+  left: 600px;
+  top: 600px;
+}

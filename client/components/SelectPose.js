@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from './Buttons';
 import Camera from './Camera';
-import PoseCarousel from './Carousel';
+import AllPoses from './AllPoses';
 import CountdownTimer from './CountdownTimer';
 
 class SelectPose extends React.Component {
@@ -18,13 +18,13 @@ class SelectPose extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(this.displayCamera, 7000);
+    setTimeout(this.displayCamera, 8000);
   }
 
   displayCamera() {
     console.log('lets begin!');
     this.setState({ loadCamera: true });
-    setTimeout(this.disableCountdown, 5000);
+    setTimeout(this.disableCountdown, 3000);
   }
 
   disableCountdown() {
@@ -44,11 +44,17 @@ class SelectPose extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          {this.state.countdown ? <CountdownTimer /> : <div />}
-          <PoseCarousel />
+        <div className="countdownDiv">
+          {this.state.countdown ? (
+            <CountdownTimer />
+          ) : (
+            <div>
+              <h1>Go!</h1>
+            </div>
+          )}
         </div>
-        <div ref={this.myRef}>
+        <AllPoses />
+        <div className="timerDiv" ref={this.myRef}>
           {this.state.loadCamera ? <Camera /> : <div />}
         </div>
       </div>
