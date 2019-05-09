@@ -45,3 +45,13 @@
 .progress-bar{
   margin: 60 0 60 0;
 }
+
+.card{
+  overflow-wrap: initial;
+  overflow: scroll;
+  height: 350px;
+}
+
+.button-warning > a{
+  color: #ffffff;
+}
