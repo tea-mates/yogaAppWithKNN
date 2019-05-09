@@ -2,5 +2,9 @@ node_modules
 npm-debug.log
 public/bundle.js
 public/bundle.js.map
+public/MountainPose
+public/TreePose
+public/HalfMoon
+public/GarlandPose
 package-lock.json
 imageDownload.js
