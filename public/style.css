@@ -59,3 +59,30 @@
   left: 600px;
   top: 600px;
 }
+
+#results {
+  text-align: center;
+}
+
+#resultsContent {
+  width: 75%;
+  display: inline-block;
+}
+
+#resultHeading {
+  padding: 30px;
+}
+
+.progress-bar {
+  margin: 60 0 60 0;
+}
+
+.card {
+  overflow-wrap: initial;
+  overflow: scroll;
+  height: 350px;
+}
+
+.button-warning > a {
+  color: #ffffff;
+}
