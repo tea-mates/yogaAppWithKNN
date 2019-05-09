@@ -45,8 +45,8 @@
 }
 
 .allPosesDiv {
-  position: absolute;
-  top: 350px;
+  position: relative;
+  top: 300px;
 }
 
 .countdownDiv {
@@ -54,10 +54,10 @@
   top: 100px;
 }
 
-.timerDiv {
+.cameraDiv {
   position: absolute;
-  left: 600px;
-  top: 600px;
+  left: 700px;
+  top: 475px;
 }
 
 #results {
@@ -85,4 +85,25 @@
 
 .button-warning > a {
   color: #ffffff;
+}
+
+.poseContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.poseContainer2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+body {
+  background-image: url('http://www.kubikvirrey2.com/wp-content/uploads/2018/10/background-design-patterns-elegant-golden-pattern-background-design-download-free-vector-art-free.jpg');
+  min-height: 100%;
+}
+
+.homepage {
+  margin-top: 75px;
 }

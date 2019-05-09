@@ -53,8 +53,10 @@ class SelectPose extends React.Component {
             </div>
           )}
         </div>
-        <AllPoses />
-        <div className="timerDiv" ref={this.myRef}>
+        <div className="allPosesDiv">
+          <AllPoses />
+        </div>
+        <div className="cameraDiv" ref={this.myRef}>
           {this.state.loadCamera ? <Camera /> : <div />}
         </div>
       </div>
