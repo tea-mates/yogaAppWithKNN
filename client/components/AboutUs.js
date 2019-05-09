@@ -14,10 +14,18 @@ const AboutUs = () => {
                 src="https://media.licdn.com/dms/image/C4E03AQG4u4wQGHNzmg/profile-displayphoto-shrink_200_200/0?e=1562803200&v=beta&t=RzrjwEBA4U1BqN9m3hP0E4IiNESe1xfe4t4YgBwtw10"
               />
             </div>
-            <p>Student in Fullstack Academy. Developing Fullstack web applications and open to new opportunities. Past experience in IOT, testing, product design and documentation.</p>
+            <p>
+              Student in Fullstack Academy. Developing Fullstack web
+              applications and open to new opportunities. Past experience in
+              IOT, testing, product design and documentation.
+            </p>
             <ul className="card-actions">
               <li>
-                <button className="button-warning"><a href='https://www.linkedin.com/in/janavi-anand/'>LinkedIn</a></button>
+                <button className="button-warning">
+                  <a href="https://www.linkedin.com/in/janavi-anand/">
+                    LinkedIn
+                  </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -34,7 +42,11 @@ const AboutUs = () => {
             <p>I'm an autodidact that enjoys learning.</p>
             <ul className="card-actions">
               <li>
-                <button className="button-warning"><a href='https://www.linkedin.com/in/lily-zdansky/'>LinkedIn</a></button>
+                <button className="button-warning">
+                  <a href="https://www.linkedin.com/in/lily-zdansky/">
+                    LinkedIn
+                  </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -48,10 +60,18 @@ const AboutUs = () => {
                 src="https://media.licdn.com/dms/image/C4E03AQFEW3Ap6WCTog/profile-displayphoto-shrink_800_800/0?e=1562803200&v=beta&t=cioGHc2P07NOKzcs1S9yYYGoadfpvHp5whQO7nW8aJ8"
               />
             </div>
-            <p>A software engineer having experience with diverse technologies. Loves to code. Currently a student at the Grace Hopper program, actively developing full-stack applications!!</p>
+            <p>
+              A software engineer having experience with diverse technologies.
+              Loves to code. Currently a student at the Grace Hopper program,
+              actively developing full-stack applications!!
+            </p>
             <ul className="card-actions">
               <li>
-                <button className="button-warning"><a href='https://www.linkedin.com/in/priyanka-garg/'>LinkedIn</a></button>
+                <button className="button-warning">
+                  <a href="https://www.linkedin.com/in/priyanka-garg/">
+                    LinkedIn
+                  </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -62,13 +82,23 @@ const AboutUs = () => {
             <div>
               <img
                 className="aboutUsImage"
-                src="https://media.licdn.com/dms/image/C4E03AQEEB_gTUre9iw/profile-displayphoto-shrink_800_800/0?e=1562803200&v=beta&t=O8zJBcuVIAv43IRKiofdl2mkVlxOYqlyoi78dV_ASDQ"
+                src="https://media.licdn.com/dms/image/C4E03AQGxzZ_c5QVFsg/profile-displayphoto-shrink_200_200/0?e=1562803200&v=beta&t=3vFW7uw5TCveWLcwIp4nRQoO80vdRS-4MmYfxPS7Wv4"
               />
             </div>
-            <p>While working in the Financial Services industry for over 7 years, I spent much of my time employing technology to automate processes and educate clients on the power of User Interface platforms. As my proven ability to build and retain client relationships manifested, I deepened my knowledge of process efficiencies and database management to introduce solutions. As I progress through my career, I am ready to jump to the other side of the spectrum and bring those User Interface platforms and automated solutions to fruition.</p>
+            <p>
+              While working in the Financial Services industry for over 7 years,
+              I spent much of my time employing technology to automate processes
+              and educate clients on the power of User Interface platforms. As I
+              progress through my career, I am ready to jump to bring those User
+              Interface platforms and automated solutions to fruition.
+            </p>
             <ul className="card-actions">
               <li>
-                <button className="button-warning"><a href='https://www.linkedin.com/in/sandra-olascoaga/'>LinkedIn</a></button>
+                <button className="button-warning">
+                  <a href="https://www.linkedin.com/in/sandra-olascoaga/">
+                    LinkedIn
+                  </a>
+                </button>
               </li>
             </ul>
           </div>
