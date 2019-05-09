@@ -41,7 +41,9 @@
   "scripts": {
     "start": "npm run start-server & npm run build-watch",
     "build-watch": "webpack -w",
-    "start-server": "nodemon --watch server -e js,html server/index.js"
+    "start-server": "nodemon --watch server -e js,html server/index.js",
+    "deploy": "script/deploy",
+    "heroku-token": "script/encrypt-heroku-auth-token"
   },
   "author": "",
   "license": "ISC"
