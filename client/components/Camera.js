@@ -156,7 +156,7 @@ class PoseNet extends Component {
             outputStride
           );
           poses.push(pose);
-          //console.log('hello')
+          console.log(poses)
           knnClassifier.load('/myKNN.json',classify)
 
           async function classify() {
@@ -176,7 +176,7 @@ class PoseNet extends Component {
 
               result = resultModel.label
               confidence = resultModel.confidencesByLabel[result]
-              console.log(`here ${result} ${confidence}`)
+              //console.log(`here ${result} ${confidence}`)
           }
           gotResults(resultModel)
 
