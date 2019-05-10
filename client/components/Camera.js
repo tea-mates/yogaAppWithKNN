@@ -1,7 +1,12 @@
 import { drawKeyPoints, drawSkeleton } from './utils';
 import React, { Component } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
+<<<<<<< Updated upstream
 
+=======
+//import dummy from './posenetData';
+import { checkPoseSuccess, poseToShow } from '../game';
+>>>>>>> Stashed changes
 
 //export let video;
 let result = '';
@@ -38,6 +43,7 @@ class PoseNet extends Component {
 
   getCanvas = elem => {
     this.canvas = elem;
+    checkPoseSuccess;
   };
 
   getVideo = elem => {
@@ -156,8 +162,13 @@ class PoseNet extends Component {
             outputStride
           );
           poses.push(pose);
+<<<<<<< Updated upstream
           //console.log('hello')
           knnClassifier.load('/myKNN.json',classify)
+=======
+          //console.log('hello');
+          knnClassifier.load('/myKNN.json', classify);
+>>>>>>> Stashed changes
 
           async function classify() {
             //console.log('hellow')
@@ -174,9 +185,23 @@ class PoseNet extends Component {
               result = ''
               confidence = 0
 
+<<<<<<< Updated upstream
               result = resultModel.label
               confidence = resultModel.confidencesByLabel[result]
               console.log(`here ${result} ${confidence}`)
+=======
+              result = resultModel.label;
+              confidence = resultModel.confidencesByLabel[result];
+
+              console.log(`here >>>> ${result} ${confidence}`);
+
+              //---------Trying to put game logic here-----------------
+
+              //CSS : highlight pose POSES[poseToShow]
+              checkPoseSuccess(result, confidence);
+            }
+            gotResults(resultModel);
+>>>>>>> Stashed changes
           }
           gotResults(resultModel)
 
