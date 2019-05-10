@@ -6,7 +6,7 @@ import { checkPoseSuccess, poseToShow } from '../game';
 
 //export let video;
 let result = '';
-let confidence = 0
+let confidence = 0;
 class PoseNet extends Component {
   static defaultProps = {
     //video sizing variables
@@ -31,15 +31,14 @@ class PoseNet extends Component {
   constructor(props) {
     super(props, PoseNet.defaultProps);
     this.state = {
-      result:'',
-      confidence:0
-    }
-    this.poseDetectionFrame = this.poseDetectionFrame.bind(this)
+      result: '',
+      confidence: 0
+    };
+    this.poseDetectionFrame = this.poseDetectionFrame.bind(this);
   }
 
   getCanvas = elem => {
     this.canvas = elem;
-    checkPoseSuccess;
   };
 
   getVideo = elem => {
@@ -169,23 +168,27 @@ class PoseNet extends Component {
               return;
             }
 
-            const poseArray = poses[0].keypoints.map(p => [p.score, p.position.x, p.position.y]);
+            const poseArray = poses[0].keypoints.map(p => [
+              p.score,
+              p.position.x,
+              p.position.y
+            ]);
 
-            let resultModel = await knnClassifier.classify(poseArray)
+            let resultModel = await knnClassifier.classify(poseArray);
             function gotResults(resultModel) {
-              result = ''
-              confidence = 0
+              result = '';
+              confidence = 0;
 
-              result = resultModel.label
-              confidence = resultModel.confidencesByLabel[result]
-              console.log(`here ${result} ${confidence}`)
+              result = resultModel.label;
+              confidence = resultModel.confidencesByLabel[result];
+              console.log(`here ${result} ${confidence}`);
+              checkPoseSuccess(result, confidence);
+            }
+            gotResults(resultModel);
           }
-          gotResults(resultModel)
-
+          break;
         }
-        break;
       }
-    }
       canvasContext.clearRect(0, 0, videoWidth, videoHeight);
 
       if (showVideo) {
@@ -221,21 +224,19 @@ class PoseNet extends Component {
     };
     findPoseDetectionFrame();
     this.setState({
-      result:result,
-      confidence:confidence
-    })
+      result: result,
+      confidence: confidence
+    });
   }
 
   render() {
-
     return (
       <div>
-
         <div>
           <video id="videoNoShow" playsInline ref={this.getVideo} />
           <canvas className="webcam" ref={this.getCanvas} />
-          <p id='result'>{this.state.result}</p>
-          <p id='confidence'>{this.state.confidence}</p>
+          <p id="result">{this.state.result}</p>
+          <p id="confidence">{this.state.confidence}</p>
         </div>
       </div>
     );
