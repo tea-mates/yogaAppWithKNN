@@ -29,19 +29,81 @@
   max-height: 60px;
 }
 
-#results{
+.carousel {
+  justify-content: center;
+}
+
+.carouselImage {
+  width: 400px;
+  height: 400px;
+}
+
+.posesImage {
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+}
+
+.allPosesDiv {
+  position: relative;
+  top: 300px;
+}
+
+.countdownDiv {
+  position: relative;
+  top: 100px;
+}
+
+.cameraDiv {
+  position: absolute;
+  left: 700px;
+  top: 475px;
+}
+
+#results {
   text-align: center;
 }
 
-#resultsContent{
+#resultsContent {
   width: 75%;
   display: inline-block;
 }
 
-#resultHeading{
+#resultHeading {
   padding: 30px;
 }
 
-.progress-bar{
+.progress-bar {
   margin: 60 0 60 0;
+}
+
+.card {
+  overflow-wrap: initial;
+  overflow: scroll;
+  height: 350px;
+}
+
+.button-warning > a {
+  color: #ffffff;
+}
+
+.poseContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.poseContainer2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+body {
+  background-image: url('http://www.kubikvirrey2.com/wp-content/uploads/2018/10/background-design-patterns-elegant-golden-pattern-background-design-download-free-vector-art-free.jpg');
+  min-height: 100%;
+}
+
+.homepage {
+  margin-top: 75px;
 }
