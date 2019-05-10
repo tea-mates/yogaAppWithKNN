@@ -1,5 +1,5 @@
 import * as posenet from '@tensorflow-models/posenet';
-import poseNet from './Camera';
+import poseNet from './client/components/Camera';
 
 let poses = [];
 const knnClassifier = ml5.KNNClassifier();
@@ -11,9 +11,9 @@ async function estimatePoseOnImage() {
   for (let i = 0; i < 100; i++) {
     let pose;
 
-    if (`/TreePose/${i}.jpg`) {
+    if (`../Warrior2Pose/${i}.jpg`) {
       let img = new Image(900, 700);
-      img.src = `/TreePose/${i}.jpg`;
+      img.src = `/Warrior2POSE/${i}.jpg`;
       pose = await net.estimateSinglePose(
         img,
         poseNet.defaultProps.imageScaleFactor,
@@ -26,10 +26,10 @@ async function estimatePoseOnImage() {
           p.position.x,
           p.position.y
         ]);
-        knnClassifier.addExample(await poseArray, 'TreePose');
+        knnClassifier.addExample(await poseArray, 'Warrior2Pose');
       }
     }
-    if (`/MountainPose/${i}.jpg`) {
+    if (`../MountainPose/${i}.jpg`) {
       let img = new Image(900, 700);
       img.src = `/MountainPose/${i}.jpg`;
       pose = await net.estimateSinglePose(
@@ -47,7 +47,7 @@ async function estimatePoseOnImage() {
         knnClassifier.addExample(await poseArray, 'MountainPose');
       }
     }
-    if (`/HalfMoon/${i}.jpg`) {
+    if (`../HalfMoon/${i}.jpg`) {
       let img = new Image(900, 700);
       img.src = `/HalfMoon/${i}.jpg`;
       pose = await net.estimateSinglePose(
@@ -65,7 +65,7 @@ async function estimatePoseOnImage() {
         knnClassifier.addExample(await poseArray, 'HalfMoonPose');
       }
     }
-    if (`/GarlandPose/${i}.jpg`) {
+    if (`../GarlandPose/${i}.jpg`) {
       let img = new Image(900, 700);
       img.src = `/GarlandPose/${i}.jpg`;
       pose = await net.estimateSinglePose(
