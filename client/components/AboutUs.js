@@ -89,7 +89,7 @@ const AboutUs = () => {
               While working in the Financial Services industry for over 7 years,
               I spent much of my time employing technology to automate processes
               and educate clients on the power of User Interface platforms. As I
-              progress through my career, I am ready to jump to bring those User
+              progress through my career, I am ready to bring those User
               Interface platforms and automated solutions to fruition.
             </p>
             <ul className="card-actions">

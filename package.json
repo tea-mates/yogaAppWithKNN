@@ -49,7 +49,7 @@
     "start-server": "nodemon --watch server -e js,html server/index.js",
     "deploy": "script/deploy",
     "heroku-token": "script/encrypt-heroku-auth-token",
-    "start-dev": "npm run start-server & npm run build-watch"
+    "start:dev": "npm run start-server & npm run build-watch"
   },
   "author": "",
   "license": "ISC"
