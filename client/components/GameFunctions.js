@@ -1,27 +1,15 @@
 import React from "react";
-import { Button } from "./Buttons";
-// import Camera from "./Camera";
-import AllPoses from "./AllPoses";
-import CountdownTimer from "./CountdownTimer";
-import Camera from "./Camera";
 
-class SelectPose extends React.Component {
-  //this will be changed to class Game
+class GameFunctions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      countdown: true,
-      loadCamera: false,
+      countdown: false,
       poseSequence: [],
       poseSuccess: false, //did they succeed to do the current pose
-      // continueToNextRound: false,
       poseBeingHighlighted: "",
       gameOver: false //set this to true if you reach 10 poses or you fail a pose
     };
-    // this.displayCamera = this.displayCamera.bind(this);
-    this.disableCountdown = this.disableCountdown.bind(this);
-    this.scrollToMyRef = this.scrollToMyRef.bind(this);
-    this.myRef = React.createRef();
     this.showSequence = this.showSequence.bind(this);
     this.checkPose = this.checkPose.bind(this);
     this.nextRound = this.nextRound.bind(this);
@@ -31,29 +19,16 @@ class SelectPose extends React.Component {
     if (this.props.countdown === false) {
       this.showSequence();
     }
-    setTimeout(this.displayCamera, 8000);
   }
 
-  displayCamera() {
-    console.log("lets begin!");
-    this.setState({ loadCamera: true });
-    setTimeout(this.disableCountdown, 3000);
+  startCountdown() {
+    this.setState({ countdown: true });
+    this.checkPose(this.props.result);
+    setTimeout();
   }
-
   disableCountdown() {
-    console.log("all done!");
     this.setState({ countdown: false });
-    this.scrollToMyRef();
   }
-
-  scrollToMyRef() {
-    this.myRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "end"
-    });
-  }
-
   showSequence() {
     const poseSequenceArr = this.state.poseSequence;
     const l = poseSequenceArr.length;
@@ -62,6 +37,7 @@ class SelectPose extends React.Component {
       this.setState({ poseBeingHighlighted: currPose });
     }
     this.setState({ poseBeingHighlighted: "" });
+    this.startCountdown();
   }
 
   checkPose(currentResult) {
@@ -102,10 +78,8 @@ class SelectPose extends React.Component {
         ) : (
           <div>
             <div className="countdownDiv">
-              {this.state.countdown ? <CountdownTimer /> : <div />}
+              <CountdownTimer />
             </div>
-
-            <div>{this.state.loadCamera ? <Camera /> : <div />}</div>
             <div className="allPosesDiv">
               <AllPoses
                 poseBeingHighlighted={this.state.poseBeingHighlighted}
@@ -118,4 +92,4 @@ class SelectPose extends React.Component {
   }
 }
 
-export default SelectPose;
+export default GameFunctions;
