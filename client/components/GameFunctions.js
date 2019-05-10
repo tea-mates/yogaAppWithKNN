@@ -1,11 +1,14 @@
 import React from "react";
+import CountdownTimer from "./CountdownTimer";
+import ResultPage from "./ResultPage";
+import AllPoses from "./AllPoses";
 
 class GameFunctions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       countdown: false,
-      poseSequence: [],
+      poseSequence: ["MountainPose"],
       poseSuccess: false, //did they succeed to do the current pose
       poseBeingHighlighted: "",
       gameOver: false //set this to true if you reach 10 poses or you fail a pose
