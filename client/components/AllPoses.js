@@ -41,22 +41,22 @@ class AllPoses extends React.Component {
     return (
       <div className="allPoseImages">
         <div className="poseContainer">
-          <img className="posesImage" src={poses[0].imageUrl} />
+          <img id="pose0" className="posesImage" src={poses[0].imageUrl} />
           <img />
           <img />
           <img />
 
-          <img className="posesImage" src={poses[1].imageUrl} />
+          <img id="pose1" className="posesImage" src={poses[1].imageUrl} />
         </div>
         <br />
         <br />
         <div className="poseContainer2">
-          <img className="posesImage" src={poses[2].imageUrl} />
+          <img id="pose2" className="posesImage" src={poses[2].imageUrl} />
           <img />
           <img />
           <img />
 
-          <img className="posesImage" src={poses[3].imageUrl} />
+          <img id="pose4" className="posesImage" src={poses[3].imageUrl} />
         </div>
       </div>
     );

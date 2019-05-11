@@ -4,6 +4,7 @@ import * as posenet from "@tensorflow-models/posenet";
 import SelectPose from "./SelectPose";
 import CountdownTimer from "./CountdownTimer";
 import GameFunctions from "./GameFunctions";
+import { checkPoseSuccess, poseToShow } from "../game";
 
 //export let video;
 let result = "";
@@ -186,8 +187,8 @@ class PoseNet extends Component {
 
               result = resultModel.label;
               confidence = resultModel.confidencesByLabel[result];
-
-              console.log(`here >>>> ${result} ${confidence}`);
+              console.log(`here ${result} ${confidence}`);
+              checkPoseSuccess(result, confidence);
             }
             gotResults(resultModel);
           }
