@@ -186,7 +186,8 @@ class PoseNet extends Component {
 
               result = resultModel.label;
               confidence = resultModel.confidencesByLabel[result];
-              console.log(`here ${result} ${confidence}`);
+
+              console.log(`here >>>> ${result} ${confidence}`);
             }
             gotResults(resultModel);
           }
