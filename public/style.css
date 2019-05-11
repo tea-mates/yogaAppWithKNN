@@ -107,3 +107,7 @@ body {
 .homepage {
   margin-top: 75px;
 }
+
+.redBorder {
+  border: solid 5px red;
+}

@@ -1,13 +1,13 @@
-import { drawKeyPoints, drawSkeleton } from "./utils";
-import React, { Component } from "react";
-import * as posenet from "@tensorflow-models/posenet";
-import SelectPose from "./SelectPose";
-import CountdownTimer from "./CountdownTimer";
-import GameFunctions from "./GameFunctions";
-import { checkPoseSuccess, poseToShow } from "../game";
+import { drawKeyPoints, drawSkeleton } from './utils';
+import React, { Component } from 'react';
+import * as posenet from '@tensorflow-models/posenet';
+import AllPoses from './AllPoses';
+import { connect } from 'react-redux';
+import GameFunctions from './GameFunctions';
+import { checkPoseSuccess } from '../store/game';
 
 //export let video;
-let result = "";
+let result = '';
 let confidence = 0;
 class PoseNet extends Component {
   static defaultProps = {
@@ -15,7 +15,7 @@ class PoseNet extends Component {
     videoWidth: 900,
     videoHeight: 700,
     flipHorizontal: true, // we dont flip, in canvas it is drawing on the other half
-    algorithm: "single-pose",
+    algorithm: 'single-pose',
     showVideo: true,
     showSkeleton: true,
     //showPoints: true, // this is for face
@@ -25,22 +25,23 @@ class PoseNet extends Component {
     nmsRadius: 20,
     outputStride: 16,
     imageScaleFactor: 0.5,
-    skeletonColor: "#ffadea",
+    skeletonColor: '#ffadea',
     skeletonLineWidth: 6,
-    loadingText: "Loading...please be patient..."
+    loadingText: 'Loading...please be patient...',
   };
 
   constructor(props) {
     super(props, PoseNet.defaultProps);
     this.state = {
-      result: "",
+      result: '',
       confidence: 0,
-      countdown: true
+      countdown: true,
     };
     this.poseDetectionFrame = this.poseDetectionFrame.bind(this);
+    this.checkPose = this.checkPose.bind(this);
   }
   disableCountdown() {
-    console.log("all done!");
+    console.log('all done!');
     this.setState({ countdown: false });
   }
   getCanvas = elem => {
@@ -56,14 +57,14 @@ class PoseNet extends Component {
       await this.setupCamera();
     } catch (error) {
       throw new Error(
-        "This browser does not support video capture, or this device does not have a camera"
+        'This browser does not support video capture, or this device does not have a camera'
       );
     }
 
     try {
       this.posenet = await posenet.load();
     } catch (error) {
-      throw new Error("PoseNet failed to load");
+      throw new Error('PoseNet failed to load');
     } finally {
       setTimeout(() => {
         this.setState({ loading: false });
@@ -76,7 +77,7 @@ class PoseNet extends Component {
   async setupCamera() {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       throw new Error(
-        "Browser API navigator.mediaDevices.getUserMedia not available"
+        'Browser API navigator.mediaDevices.getUserMedia not available'
       );
     }
     const { videoWidth, videoHeight } = this.props;
@@ -87,10 +88,10 @@ class PoseNet extends Component {
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: false,
       video: {
-        facingMode: "user",
+        facingMode: 'user',
         width: videoWidth,
-        height: videoHeight
-      }
+        height: videoHeight,
+      },
     });
 
     video.srcObject = stream;
@@ -106,7 +107,7 @@ class PoseNet extends Component {
   detectPose() {
     const { videoWidth, videoHeight } = this.props;
     const canvas = this.canvas;
-    const canvasContext = canvas.getContext("2d");
+    const canvasContext = canvas.getContext('2d');
 
     canvas.width = videoWidth;
     canvas.height = videoHeight;
@@ -130,7 +131,7 @@ class PoseNet extends Component {
       showPoints,
       showSkeleton,
       skeletonColor,
-      skeletonLineWidth
+      skeletonLineWidth,
     } = this.props;
 
     const posenetModel = this.posenet;
@@ -140,7 +141,7 @@ class PoseNet extends Component {
       let poses = [];
 
       switch (algorithm) {
-        case "multi-pose": {
+        case 'multi-pose': {
           poses = await posenetModel.estimateMultiplePoses(
             video,
             imageScaleFactor,
@@ -152,7 +153,7 @@ class PoseNet extends Component {
           );
           break;
         }
-        case "single-pose": {
+        case 'single-pose': {
           const knnClassifier = ml5.KNNClassifier();
 
           //let poseNetml = ml5.poseNet(video, knnClassifier);
@@ -164,31 +165,30 @@ class PoseNet extends Component {
           );
           poses.push(pose);
           //console.log('hello')
-          knnClassifier.load("/myKNN.json", classify);
+          knnClassifier.load('/myKNN.json', classify);
 
           async function classify() {
             //console.log('hellow')
             const numLabels = knnClassifier.getNumLabels();
             if (numLabels <= 0) {
-              console.error("There is no examples in any label");
+              console.error('There is no examples in any label');
               return;
             }
 
             const poseArray = poses[0].keypoints.map(p => [
               p.score,
               p.position.x,
-              p.position.y
+              p.position.y,
             ]);
 
             let resultModel = await knnClassifier.classify(poseArray);
             function gotResults(resultModel) {
-              result = "";
+              result = '';
               confidence = 0;
 
               result = resultModel.label;
               confidence = resultModel.confidencesByLabel[result];
               console.log(`here ${result} ${confidence}`);
-              checkPoseSuccess(result, confidence);
             }
             gotResults(resultModel);
           }
@@ -229,39 +229,39 @@ class PoseNet extends Component {
       requestAnimationFrame(findPoseDetectionFrame);
     };
     findPoseDetectionFrame();
-    this.setState({
-      result: result,
-      confidence: confidence
-    });
+  }
+
+  checkPose(result, confidence) {
+    // start checking the pose once the countdown for the round/level of the game has begun
+    if (this.props.countdown) {
+      this.props.checkPoseSuccess(result, confidence);
+    }
   }
 
   render() {
     return (
       <div>
         <div>
-          <div className="countdownDiv">
-            {this.state.countdown ? (
-              <CountdownTimer />
-            ) : (
-              <div>
-                <h1>Go!</h1>
-              </div>
-            )}
-          </div>
           <video id="videoNoShow" playsInline ref={this.getVideo} />
           <canvas className="webcam" ref={this.getCanvas} />
           <p id="result">{this.state.result}</p>
-          {/* <p id='confidence'>{this.state.confidence}</p> */}
-          {/* <SelectPose
-            countdown={this.state.countdown}
-            result={this.state.result}
-            confidence={this.state.confidence}
-          /> */}
-          <GameFunctions />
+          <p id="confidence">{this.state.confidence}</p>
         </div>
       </div>
     );
   }
 }
 
-export default PoseNet;
+const mapState = (state, ownProps) => ({
+  countdown: state.countdown,
+});
+
+const mapDispatch = dispatch => ({
+  checkPoseSuccess: (result, confidence) =>
+    dispatch(checkPoseSuccess(result, confidence)),
+});
+
+export default connect(
+  mapState,
+  mapDispatch
+)(PoseNet);
