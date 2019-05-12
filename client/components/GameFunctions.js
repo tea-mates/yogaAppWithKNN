@@ -1,8 +1,8 @@
-import React from 'react';
-import CountdownTimer from './CountdownTimer';
-import ResultPage from './ResultPage';
-import { connect } from 'react-redux';
-import { createSequence, nextRound } from '../store/game';
+import React from "react";
+import CountdownTimer from "./CountdownTimer";
+import ResultPage from "./ResultPage";
+import { connect } from "react-redux";
+import { createSequence, nextRound } from "../store/game";
 
 class GameFunctions extends React.Component {
   constructor(props) {
@@ -11,7 +11,21 @@ class GameFunctions extends React.Component {
   }
 
   componentDidMount() {
-    this.props.createSequence();
+    // 1. begin the first round
+    // 2. make a sequence of 1 pose, and increment game round from 0 to 1
+    // 3. display the sequence to the player
+    //    - this happens in AllPoses.js
+    // 4. once displayed, start countdown timer
+    // 5. during the countdown, user does the pose
+    //    a. complete successfully
+    //    b. timeout / failure
+    // this.props.createSequence();
+    this.startFirstRound();
+  }
+
+  startFirstRound() {
+    // this.props.createSequence();
+    this.props.nextRound();
   }
 
   beginNextRound() {
@@ -40,12 +54,12 @@ class GameFunctions extends React.Component {
 const mapState = state => ({
   countdown: state.countdown,
   poseSuccess: state.poseSuccess,
-  gameOver: state.gameOver,
+  gameOver: state.gameOver
 });
 
 const mapDispatch = dispatch => ({
   createSequence: () => dispatch(createSequence()),
-  nextRound: () => dispatch(nextRound()),
+  nextRound: () => dispatch(nextRound())
 });
 
 export default connect(
