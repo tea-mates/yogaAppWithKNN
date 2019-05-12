@@ -51,18 +51,17 @@ class AllPoses extends React.Component {
   highlightPose() {}
 
   showSequence = () => {
-    //we first need to determine how many poses we will show the user/will be in the sequence which is depenedent on which round of the game the user is on
-    //this is happening in createSequence function above;
     const { poseSequence, beginCountdown } = this.props;
     const { poseTimeframeMs } = this.state;
     const l = poseSequence.length;
     for (let i = 0; i < l; i++) {
       (function(i) {
+        //this anon fn slows down the for loop
         setTimeout(function() {
           let currPose = poseSequence[i];
           this.setState({ poseBeingHighlighted: currPose });
         }, poseTimeframeMs * i);
-      })(i);
+      })(i); //this invokes the outer anon fn
     }
 
     this.setState({ poseBeingHighlighted: "" });
@@ -72,20 +71,24 @@ class AllPoses extends React.Component {
   };
 
   render() {
+    const { gameRound } = this.props;
     return (
-      <div className="allPoseImages">
-        <div className="poseContainer">
-          {poses.map((pose, i) => {
-            const { poseBeingHighlighted } = this.state;
-            const isPoseHighlighted = poseBeingHighlighted === pose.name;
-            return (
-              <img
-                className="posesImage"
-                src={isPoseHighlighted ? pose.highlight : pose.imageUrl}
-                key={i}
-              />
-            );
-          })}
+      <div>
+        <h1>Round {gameRound}</h1>
+        <div className="allPoseImages">
+          <div className="poseContainer">
+            {poses.map((pose, i) => {
+              const { poseBeingHighlighted } = this.state;
+              const isPoseHighlighted = poseBeingHighlighted === pose.name;
+              return (
+                <img
+                  className="posesImage"
+                  src={isPoseHighlighted ? pose.highlight : pose.imageUrl}
+                  key={i}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     );
@@ -93,7 +96,8 @@ class AllPoses extends React.Component {
 }
 
 const mapState = state => ({
-  poseSequence: state.poseSequence
+  poseSequence: state.poseSequence,
+  gameRound: state.gameRound
 });
 
 const mapDispatchToProps = dispatch => ({

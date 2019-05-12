@@ -2,11 +2,12 @@ import React from "react";
 import CountdownTimer from "./CountdownTimer";
 import ResultPage from "./ResultPage";
 import { connect } from "react-redux";
-import { createSequence, nextRound } from "../store/game";
+import { createSequence, nextRound, beginCountdown } from "../store/game";
 
 class GameFunctions extends React.Component {
   constructor(props) {
     super(props);
+
     this.beginNextRound = this.beginNextRound.bind(this);
   }
 
@@ -19,8 +20,15 @@ class GameFunctions extends React.Component {
     // 5. during the countdown, user does the pose
     //    a. complete successfully
     //    b. timeout / failure
+
     // this.props.createSequence();
     this.startFirstRound();
+  }
+
+  componentDidUpdate() {
+    if (this.props.poseSuccess) {
+      this.props.beginCountdown();
+    }
   }
 
   startFirstRound() {
@@ -59,7 +67,8 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   createSequence: () => dispatch(createSequence()),
-  nextRound: () => dispatch(nextRound())
+  nextRound: () => dispatch(nextRound()),
+  beginCountdown: () => dispatch(beginCountdown())
 });
 
 export default connect(

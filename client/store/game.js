@@ -5,7 +5,6 @@ import history from "../history";
  */
 const START_GAME = "START_GAME";
 const END_GAME = "END_GAME";
-const LEVEL_UP = "LEVEL_UP";
 const SUCCESS = "SUCCESS";
 const FAILED = "FAILED";
 const DISABLE_COUNTDOWN = "DISABLE_COUNTDOWN";
@@ -15,18 +14,15 @@ const UPDATE_SEQUENCE = "UPDATE_SEQUENCE";
  * ACTION CREATORS
  */
 const poseSuccess = () => ({
-  type: SUCCESS,
-  poseSuccess: true
+  type: SUCCESS
 });
 
 const gameOver = () => ({
-  type: DISABLE_COUNTDOWN,
-  gameOver: true
+  type: DISABLE_COUNTDOWN
 });
 
 const updateSequence = () => ({
-  type: UPDATE_SEQUENCE,
-  pose: _getRandomPose()
+  type: UPDATE_SEQUENCE
 });
 
 const startCountdown = () => ({
@@ -34,13 +30,7 @@ const startCountdown = () => ({
 });
 
 const endCountdown = () => ({
-  type: END_GAME,
-  countdown: false
-});
-
-const nextGameRound = round => ({
-  type: LEVEL_UP,
-  gameRound: round
+  type: END_GAME
 });
 
 /**
@@ -88,25 +78,25 @@ export const beginCountdown = () => {
   };
 };
 
-// export const disableCountdown = () => {
-//   dispatch(endCountdown());
-// };
+export const disableCountdown = () => {
+  dispatch(endCountdown());
+};
 
-export const checkPoseSuccess = (result, confidence) => {
+export const checkPoseSuccess = (result, confidence, currPose) => {
   console.log("You have to do -->", poseToShow);
   return dispatch => {
-    const poseSequenceArr = state.poseSequence;
-    const l = poseSequenceArr.length;
-    for (let i = 0; i < l; i++) {
-      let currPose = poseSequenceArr[i];
-      if (currPose === result && confidence > 0.6) {
+    // const poseSequenceArr = state.poseSequence;
+    // const l = poseSequenceArr.length;
+    // for (let i = 0; i < l; i++) {
+      // let currPose = poseSequenceArr[i];
+      if (currPose === result && confidence > 0.3) { //do we need the confidence score for this game???
         // i am not sure if we will want to use the confidence score as a measure of success since it is inconsistent
         console.log("Success.. Pose done! move to next level");
         dispatch(poseSuccess());
       }
-      if (!state.poseSuccess || !state.countdown) {
-        dispatch(gameOver());
-      }
+      // if (!this.props.countdown) {
+      //   dispatch(gameOver());
+      // }
     }
   };
 };
@@ -130,7 +120,7 @@ const defaultGame = {
   gameRound: 0,
   poseSequence: [],
   poseSuccess: false, //did they succeed to do the current pose
-  gameOver: false //set this to true if you reach 10 poses or you fail a pose
+  gameOver: false, //set this to true if you reach 10 poses or you fail a pose
 };
 
 /**
@@ -138,20 +128,18 @@ const defaultGame = {
  */
 export default function(state = defaultGame, action) {
   switch (action.type) {
-    case START_GAME:
+    case START_GAME: //starts game or starts checking for next pose
       return { ...state, countdown: true };
     case END_GAME:
-      return { ...state, countdown: action.countdown };
-    case LEVEL_UP:
-      return { ...state, gameRound: action.gameRound };
+      return { ...state, countdown: false };
     case SUCCESS:
-      return { ...state, poseSuccess: action.poseSuccess };
+      return { ...state, poseSuccess: true };
     case DISABLE_COUNTDOWN:
-      return { ...state, gameOver: action.gameOver };
+      return { ...state, gameOver: true };
     case UPDATE_SEQUENCE:
       return {
         ...state,
-        poseSequence: [...state.poseSequence, action.pose],
+        poseSequence: [...state.poseSequence, _getRandomPose()],
         gameRound: state.gameRound + 1
       };
     default:
