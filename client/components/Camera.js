@@ -1,9 +1,8 @@
-import { drawKeyPoints, drawSkeleton } from './utils';
+//import { drawKeyPoints, drawSkeleton } from './utils';
 import React, { Component } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
+import {detectPose,poseDetectionFrame} from '../poseNetFunc'
 
-let result = '';
-let confidence = 0;
 class PoseNet extends Component {
   static defaultProps = {
     //video sizing variables
@@ -27,11 +26,10 @@ class PoseNet extends Component {
 
   constructor(props) {
     super(props, PoseNet.defaultProps);
-    this.state = {
-      result: '',
-      confidence: 0
-    };
-    this.poseDetectionFrame = this.poseDetectionFrame.bind(this);
+    this.state={
+      flag:true
+    }
+    this.detectPose = detectPose.bind(this)
   }
 
   getCanvas = elem => {
@@ -61,7 +59,7 @@ class PoseNet extends Component {
       }, 200);
     }
 
-    this.detectPose();
+    this.detectPose(this.props,this.canvas,poseDetectionFrame,this.posenet,this.video);
   }
 
   async setupCamera() {
@@ -85,7 +83,6 @@ class PoseNet extends Component {
     });
 
     video.srcObject = stream;
-
     return new Promise(resolve => {
       video.onloadedmetadata = () => {
         video.play();
@@ -93,148 +90,16 @@ class PoseNet extends Component {
       };
     });
   }
-  // this is setting up the canvas
-  detectPose() {
-    const { videoWidth, videoHeight } = this.props;
-    const canvas = this.canvas;
-    const canvasContext = canvas.getContext('2d');
-
-    canvas.width = videoWidth;
-    canvas.height = videoHeight;
-
-    this.poseDetectionFrame(canvasContext);
+  componentWillUpdate(){
+    this.video.pause()
   }
-
-  poseDetectionFrame(canvasContext) {
-    const {
-      algorithm,
-      imageScaleFactor,
-      flipHorizontal,
-      outputStride,
-      minPoseConfidence,
-      minPartConfidence,
-      maxPoseDetections,
-      nmsRadius,
-      videoWidth,
-      videoHeight,
-      showVideo,
-      showPoints,
-      showSkeleton,
-      skeletonColor,
-      skeletonLineWidth
-    } = this.props;
-
-    const posenetModel = this.posenet;
-    const video = this.video;
-
-    const findPoseDetectionFrame = async () => {
-      let poses = [];
-
-      switch (algorithm) {
-        case 'multi-pose': {
-          poses = await posenetModel.estimateMultiplePoses(
-            video,
-            imageScaleFactor,
-            flipHorizontal,
-            outputStride,
-            maxPoseDetections,
-            minPartConfidence,
-            nmsRadius
-          );
-          break;
-        }
-        case 'single-pose': {
-          const knnClassifier = ml5.KNNClassifier();
-
-          //let poseNetml = ml5.poseNet(video, knnClassifier);
-          const pose = await posenetModel.estimateSinglePose(
-            video,
-            imageScaleFactor,
-            flipHorizontal,
-            outputStride
-          );
-          poses.push(pose);
-          console.log('hello');
-          knnClassifier.load('/myKNN.json', classify);
-
-          async function classify() {
-            //console.log('hellow')
-            const numLabels = knnClassifier.getNumLabels();
-            if (numLabels <= 0) {
-              console.error('There is no examples in any label');
-              return;
-            }
-
-            const poseArray = poses[0].keypoints.map(p => [
-              p.score,
-              p.position.x,
-              p.position.y
-            ]);
-
-            let resultModel = await knnClassifier.classify(poseArray);
-            function gotResults(resultModel) {
-              result = '';
-              confidence = 0;
-
-              result = resultModel.label;
-              confidence = resultModel.confidencesByLabel[result];
-
-              console.log(`here >>>> ${result} ${confidence}`);
-            }
-            gotResults(resultModel);
-          }
-          break;
-        }
-      }
-      canvasContext.clearRect(0, 0, videoWidth, videoHeight);
-
-      if (showVideo) {
-        canvasContext.save();
-        canvasContext.scale(-1, 1);
-        canvasContext.translate(-videoWidth, 0);
-        canvasContext.drawImage(video, 0, 0, videoWidth, videoHeight);
-        canvasContext.restore();
-      }
-
-      poses.forEach(({ score, keypoints }) => {
-        if (score >= minPoseConfidence) {
-          if (showPoints) {
-            drawKeyPoints(
-              keypoints,
-              minPartConfidence,
-              skeletonColor,
-              canvasContext
-            );
-          }
-          if (showSkeleton) {
-            drawSkeleton(
-              keypoints,
-              minPartConfidence,
-              skeletonColor,
-              skeletonLineWidth,
-              canvasContext
-            );
-          }
-        }
-      });
-      requestAnimationFrame(findPoseDetectionFrame);
-    };
-    findPoseDetectionFrame();
-    this.setState({
-      result: result,
-      confidence: confidence
-    });
-  }
-
   render() {
     return (
       <div>
-        <div>
-          <video id="videoNoShow" playsInline ref={this.getVideo} />
-          <canvas className="webcam" ref={this.getCanvas} />
-          <p id="result">{this.state.result}</p>
-          <p id="confidence">{this.state.confidence}</p>
-        </div>
+        {this.state.flag ? <div>
+           <video id="videoNoShow" playsInline ref={this.getVideo} />
+           <canvas className="webcam" ref={this.getCanvas} />
+        </div> : <div>Result</div>}
       </div>
     );
   }
