@@ -33,12 +33,12 @@ class GameFunctions extends React.Component {
 
   startFirstRound() {
     // this.props.createSequence();
-    this.props.nextRound();
+    this.props.nextRound(this.props.poseSequence);
   }
 
   beginNextRound() {
     if (!this.props.countdown && !this.props.gameOver) {
-      this.props.nextRound();
+      this.props.nextRound(this.props.poseSequence);
     }
   }
 
@@ -62,12 +62,13 @@ class GameFunctions extends React.Component {
 const mapState = state => ({
   countdown: state.countdown,
   poseSuccess: state.poseSuccess,
-  gameOver: state.gameOver
+  gameOver: state.gameOver,
+  poseSequence: state.poseSequence
 });
 
 const mapDispatch = dispatch => ({
   createSequence: () => dispatch(createSequence()),
-  nextRound: () => dispatch(nextRound()),
+  nextRound: poseSequence => dispatch(nextRound(poseSequence)),
   beginCountdown: () => dispatch(beginCountdown())
 });
 

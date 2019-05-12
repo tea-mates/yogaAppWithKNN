@@ -5,7 +5,7 @@ import * as posenet from "@tensorflow-models/posenet";
 import AllPoses from "./AllPoses";
 import { connect } from "react-redux";
 import GameFunctions from "./GameFunctions";
-import { checkPoseSuccess } from "../store/game";
+import { checkPoseSuccess, nextRound } from "../store/game";
 
 //export let video;
 let result = "";
@@ -235,14 +235,15 @@ class PoseNet extends Component {
   }
 
   checkPose(result, confidence) {
-    const { poseSequence } = this.props;
+    const { poseSequence, countdown } = this.props;
     // start checking the pose once the countdown for the round/level of the game has begun
-    if (this.props.countdown) {
+    if (countdown) {
       //if there's game-time left
       for (let i = 0; i < poseSequence.length; i++) {
         let currentPose = poseSequence[i];
-        this.props.checkPoseSuccess(result, confidence, currentPose);
+        this.props.checkPoseSuccess(result, confidence, currentPose, countdown);
       }
+      this.props.nextRound(poseSequence);
     }
   }
 
@@ -267,7 +268,8 @@ const mapState = (state, ownProps) => ({
 
 const mapDispatch = dispatch => ({
   checkPoseSuccess: (result, confidence) =>
-    dispatch(checkPoseSuccess(result, confidence))
+    dispatch(checkPoseSuccess(result, confidence)),
+  nextRound: poseSequence => dispatch(nextRound(poseSequence))
 });
 
 export default connect(

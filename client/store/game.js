@@ -6,7 +6,7 @@ import history from "../history";
 const START_GAME = "START_GAME";
 const END_GAME = "END_GAME";
 const SUCCESS = "SUCCESS";
-const FAILED = "FAILED";
+// const FAILED = "FAILED";
 const DISABLE_COUNTDOWN = "DISABLE_COUNTDOWN";
 const UPDATE_SEQUENCE = "UPDATE_SEQUENCE";
 
@@ -82,28 +82,29 @@ export const disableCountdown = () => {
   dispatch(endCountdown());
 };
 
-export const checkPoseSuccess = (result, confidence, currPose) => {
+export const checkPoseSuccess = (result, confidence, currPose, countdown) => {
   console.log("You have to do -->", poseToShow);
   return dispatch => {
     // const poseSequenceArr = state.poseSequence;
     // const l = poseSequenceArr.length;
     // for (let i = 0; i < l; i++) {
-      // let currPose = poseSequenceArr[i];
-      if (currPose === result && confidence > 0.3) { //do we need the confidence score for this game???
-        // i am not sure if we will want to use the confidence score as a measure of success since it is inconsistent
-        console.log("Success.. Pose done! move to next level");
-        dispatch(poseSuccess());
-      }
-      // if (!this.props.countdown) {
-      //   dispatch(gameOver());
-      // }
+    // let currPose = poseSequenceArr[i];
+    if (currPose === result && confidence > 0.3) {
+      //do we need the confidence score for this game???
+      // i am not sure if we will want to use the confidence score as a measure of success since it is inconsistent
+      console.log("Success.. Pose done! move to next level");
+      dispatch(poseSuccess());
+    }
+    if (!countdown) {
+      dispatch(gameOver());
     }
   };
 };
 
-export const nextRound = () => {
+export const nextRound = poseSequence => {
   return dispatch => {
-    if (state.poseSequence.length === 10) {
+    //does this need poseSequence passed in as an argument?
+    if (poseSequence.length === 10) {
       dispatch(gameOver());
     } else {
       dispatch(updateSequence());
@@ -120,7 +121,7 @@ const defaultGame = {
   gameRound: 0,
   poseSequence: [],
   poseSuccess: false, //did they succeed to do the current pose
-  gameOver: false, //set this to true if you reach 10 poses or you fail a pose
+  gameOver: false //set this to true if you reach 10 poses or you fail a pose
 };
 
 /**
