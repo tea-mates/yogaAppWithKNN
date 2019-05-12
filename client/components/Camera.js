@@ -59,7 +59,8 @@ class PoseNet extends Component {
       }, 200);
     }
 
-    this.detectPose(this.props,this.canvas,poseDetectionFrame,this.posenet,this.video);
+    let data = await this.detectPose(this.props,this.canvas,poseDetectionFrame,this.posenet,this.video);
+    console.log(data)
   }
 
   async setupCamera() {
@@ -90,9 +91,7 @@ class PoseNet extends Component {
       };
     });
   }
-  componentWillUpdate(){
-    this.video.pause()
-  }
+
   render() {
     return (
       <div>

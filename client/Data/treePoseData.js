@@ -53,24 +53,9 @@ let pose ={score: 0.7736789654282963, keypoints: [
   score: 0.6908342242240906}
   ]}
 
-  let poses = [pose]
-
-  // export let normArray = poses[0].keypoints.map(p=>
-  //   {let tempx = Math.pow((p.position.x),2);
-  //   let tempy = Math.pow((p.position.y),2);
-  //   let tempxy = Math.pow((p.position.x + p.position.y),2)
-  //   let normx = tempx/tempxy;
-  //   let normy = tempy/tempxy;
-  //   return [normx,normy]
-  // })
-
-  export let treeNormArray = normArrGen(poses)
-
-  // export let flatnormArray = normArray.reduce((a,b)=>{
-  //   return a.concat(b)
-  // },[])
-
-  export let treeFlatnormArray = flattenArr(treeNormArray)
+let poses = [pose]
+export let treeNormArray = normArrGen(poses)
+export let treeFlatnormArray = flattenArr(treeNormArray)
 
 
 

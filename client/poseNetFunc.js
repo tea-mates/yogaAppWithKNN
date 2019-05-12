@@ -62,11 +62,12 @@ export function poseDetectionFrame(canvasContext,props,posenet,argvideo) {
         let cosineDistance = compare(normArray1,flatImageData)
         console.log(cosineDistance)
         let minCosineDistance = Math.min(...cosineDistance)
-        if(minCosineDistance>0.5){
+        if(minCosineDistance>0.4){
           console.log(`Bad Pose`)
         }else{
           let index = cosineDistance.indexOf(minCosineDistance)
           result = {pose:compareObj[index].pose,value:minCosineDistance}
+          console.log(`Pose is ${compareObj[index].pose} and points ${minCosineDistance}`)
         }
         break;
       }
