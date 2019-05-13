@@ -1,7 +1,8 @@
 //import { drawKeyPoints, drawSkeleton } from './utils';
 import React, { Component } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
-import {detectPose, poseDetectionFrame} from '../poseNetFunc'
+import { detectPose, poseDetectionFrame } from '../poseNetFunc';
+import { connect } from 'react-redux';
 
 class PoseNet extends Component {
   static defaultProps = {
@@ -9,7 +10,7 @@ class PoseNet extends Component {
     videoWidth: 900,
     videoHeight: 700,
     flipHorizontal: true, // we dont flip, in canvas it is drawing on the other half
-    algorithm: "single-pose",
+    algorithm: 'single-pose',
     showVideo: true,
     showSkeleton: true,
     minPoseConfidence: 0.1, // at what accuracy of estimation you want to draw
@@ -18,17 +19,17 @@ class PoseNet extends Component {
     nmsRadius: 20,
     outputStride: 16,
     imageScaleFactor: 0.5,
-    skeletonColor: "#ffadea",
+    skeletonColor: '#ffadea',
     skeletonLineWidth: 6,
-    loadingText: "Loading...please be patient..."
+    loadingText: 'Loading...please be patient...',
   };
 
   constructor(props) {
     super(props, PoseNet.defaultProps);
-    this.state={
-      flag:true
-    }
-    this.detectPose = detectPose.bind(this)
+    this.state = {
+      flag: true,
+    };
+    this.detectPose = detectPose.bind(this);
   }
   getCanvas = elem => {
     this.canvas = elem;
@@ -44,27 +45,33 @@ class PoseNet extends Component {
       await this.setupCamera();
     } catch (error) {
       throw new Error(
-        "This browser does not support video capture, or this device does not have a camera"
+        'This browser does not support video capture, or this device does not have a camera'
       );
     }
 
     try {
       this.posenet = await posenet.load();
     } catch (error) {
-      throw new Error("PoseNet failed to load");
+      throw new Error('PoseNet failed to load');
     } finally {
       setTimeout(() => {
         this.setState({ loading: false });
       }, 200);
     }
 
-    this.detectPose(this.props,this.canvas,poseDetectionFrame,this.posenet,this.video);
+    this.detectPose(
+      this.props,
+      this.canvas,
+      poseDetectionFrame,
+      this.posenet,
+      this.video
+    );
   }
 
   async setupCamera() {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       throw new Error(
-        "Browser API navigator.mediaDevices.getUserMedia not available"
+        'Browser API navigator.mediaDevices.getUserMedia not available'
       );
     }
     const { videoWidth, videoHeight } = this.props;
@@ -75,10 +82,10 @@ class PoseNet extends Component {
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: false,
       video: {
-        facingMode: "user",
+        facingMode: 'user',
         width: videoWidth,
-        height: videoHeight
-      }
+        height: videoHeight,
+      },
     });
 
     video.srcObject = stream;
@@ -93,10 +100,14 @@ class PoseNet extends Component {
   render() {
     return (
       <div>
-        {this.state.flag ? <div>
-           <video id="videoNoShow" playsInline ref={this.getVideo} />
-           <canvas className="webcam" ref={this.getCanvas} />
-        </div> : <div>Result</div>}
+        {this.state.flag ? (
+          <div>
+            <video id="videoNoShow" playsInline ref={this.getVideo} />
+            <canvas className="webcam" ref={this.getCanvas} />
+          </div>
+        ) : (
+          <div>Result</div>
+        )}
       </div>
     );
   }
@@ -104,13 +115,13 @@ class PoseNet extends Component {
 
 const mapState = (state, ownProps) => ({
   countdown: state.countdown,
-  poseSequence: state.poseSequence
+  poseSequence: state.poseSequence,
 });
 
 const mapDispatch = dispatch => ({
   checkPoseSuccess: (result, confidence) =>
     dispatch(checkPoseSuccess(result, confidence)),
-  nextRound: poseSequence => dispatch(nextRound(poseSequence))
+  nextRound: poseSequence => dispatch(nextRound(poseSequence)),
 });
 
 export default connect(

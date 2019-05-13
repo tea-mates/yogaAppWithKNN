@@ -55,13 +55,14 @@ export function poseDetectionFrame(canvasContext, props, posenet, argvideo) {
         poses.push(pose);
         // let refPoses = ['TreePose','GarlandPose','MountainPose','ShivaTwist']
         //this has been added to the redux game store
-        let index = refPoses.indexOf('TreePose');
+        // let index = refPoses.indexOf('TreePose');
 
         let flatRefImage = flatImageData[index];
 
         let normArray1 = normArrGen(poses);
 
         let minCosineDistance = compare(normArray1, flatRefImage);
+
         if (minCosineDistance > 0.4) {
           console.log(`Bad Pose`);
         } else {
