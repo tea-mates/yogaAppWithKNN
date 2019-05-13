@@ -1,7 +1,9 @@
 //import { drawKeyPoints, drawSkeleton } from './utils';
 import React, { Component } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
-import {detectPose,poseDetectionFrame} from '../poseNetFunc'
+import { detectPose, poseDetectionFrame } from '../poseNetFunc';
+
+let stream = null;
 
 class PoseNet extends Component {
   static defaultProps = {
@@ -25,10 +27,10 @@ class PoseNet extends Component {
 
   constructor(props) {
     super(props, PoseNet.defaultProps);
-    this.state={
-      flag:true
-    }
-    this.detectPose = detectPose.bind(this)
+    this.state = {
+      flag: true
+    };
+    this.detectPose = detectPose.bind(this);
   }
 
   getCanvas = elem => {
@@ -38,6 +40,11 @@ class PoseNet extends Component {
   getVideo = elem => {
     this.video = elem;
   };
+
+  componentWillUnmount() {
+    let track = stream.getTracks()[0];
+    track.stop();
+  }
 
   async componentDidMount() {
     try {
@@ -58,8 +65,14 @@ class PoseNet extends Component {
       }, 200);
     }
 
-    let data = await this.detectPose(this.props,this.canvas,poseDetectionFrame,this.posenet,this.video);
-    console.log(data)
+    let data = await this.detectPose(
+      this.props,
+      this.canvas,
+      poseDetectionFrame,
+      this.posenet,
+      this.video
+    );
+    console.log(data);
   }
 
   async setupCamera() {
@@ -73,7 +86,7 @@ class PoseNet extends Component {
     video.width = videoWidth;
     video.height = videoHeight;
 
-    const stream = await navigator.mediaDevices.getUserMedia({
+    stream = await navigator.mediaDevices.getUserMedia({
       audio: false,
       video: {
         facingMode: 'user',
@@ -93,10 +106,16 @@ class PoseNet extends Component {
 
   render() {
     return (
-        {this.state.flag ? <div>
-           <video id="videoNoShow" playsInline ref={this.getVideo} />
-           <canvas className="webcam" ref={this.getCanvas} />
-        </div> : <div>Result</div>}
+      <div>
+        {this.state.flag ? (
+          <div>
+            <video id="videoNoShow" playsInline ref={this.getVideo} />
+            <canvas className="webcam" ref={this.getCanvas} />
+          </div>
+        ) : (
+          <div>Result</div>
+        )}
+      </div>
     );
   }
 }
