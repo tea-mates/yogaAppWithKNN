@@ -17,8 +17,8 @@ class SelectPose extends React.Component {
     this.myRef = React.createRef();
   }
 
-  componentDidMount() {
-    setTimeout(this.displayCamera, 8000);
+  async componentDidMount() {
+    await setTimeout(this.displayCamera, 8000);
   }
 
   displayCamera() {

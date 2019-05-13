@@ -65,14 +65,7 @@ class PoseNet extends Component {
       }, 200);
     }
 
-    let data = await this.detectPose(
-      this.props,
-      this.canvas,
-      poseDetectionFrame,
-      this.posenet,
-      this.video
-    );
-    console.log(data);
+    this.detectPose(this.props,this.canvas,poseDetectionFrame,this.posenet,this.video);
   }
 
   async setupCamera() {
@@ -107,14 +100,10 @@ class PoseNet extends Component {
   render() {
     return (
       <div>
-        {this.state.flag ? (
-          <div>
-            <video id="videoNoShow" playsInline ref={this.getVideo} />
-            <canvas className="webcam" ref={this.getCanvas} />
-          </div>
-        ) : (
-          <div>Result</div>
-        )}
+        {this.state.flag ? <div>
+           <video id="videoNoShow" playsInline ref={this.getVideo} />
+           <canvas className="webcam" ref={this.getCanvas} />
+        </div> : <div>Result</div>}
       </div>
     );
   }

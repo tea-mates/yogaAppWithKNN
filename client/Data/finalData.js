@@ -12,11 +12,13 @@ flatImageData.push(
 );
 
 export let compareObj = [
-  { pose: 'Tree Pose', norm: treeNormArray },
-  { pose: 'Garland Pose', norm: garlandNormArray },
-  { pose: 'Mountain Pose', norm: mountainNormArray },
-  { pose: 'Shiva Twist', norm: twistNormArray }
-];
+  {pose:'TreePose',norm:treeNormArray},
+  {pose:'GarlandPose',norm:garlandNormArray},
+  {pose:'MountainPose',norm:mountainNormArray},
+  {pose:'ShivaTwist',norm:twistNormArray}
+]
+
+export let parts = ['nose','leftEye','rightEye','leftEar','rightEar','rightShoulder','leftElbow','rightElbow','leftWrist','rightWrist','leftHip','rightHip','leftKnee','rightKnee','leftAnkle','rightAnkle']
 
 export let parts = [
   'nose',
