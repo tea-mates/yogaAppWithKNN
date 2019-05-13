@@ -12,6 +12,7 @@ const Routes = () => {
       <Route exact path="/aboutus" component={AboutUs} />
       <Route exact path="/start" component={SelectPose} />
       <Route exact path="/result" component={Result} />
+      <Route exact path="/training" component={training} />
     </Switch>
   );
 };
