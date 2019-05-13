@@ -12,7 +12,6 @@ class PoseNet extends Component {
     algorithm: 'single-pose',
     showVideo: true,
     showSkeleton: true,
-    //showPoints: true, // this is for face
     minPoseConfidence: 0.1, // at what accuracy of estimation you want to draw
     minPartConfidence: 0.5,
     maxPoseDetections: 2,
@@ -94,12 +93,10 @@ class PoseNet extends Component {
 
   render() {
     return (
-      <div>
         {this.state.flag ? <div>
            <video id="videoNoShow" playsInline ref={this.getVideo} />
            <canvas className="webcam" ref={this.getCanvas} />
         </div> : <div>Result</div>}
-      </div>
     );
   }
 }
