@@ -10,7 +10,7 @@ class Home extends React.Component {
     return (
       <div className="homepage">
         <div>
-          <h1>Product Name</h1>
+          <h1>Yog-I Says</h1>
         </div>
         <div>
           {/* //placeholder for annimated demo */}

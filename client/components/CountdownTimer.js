@@ -35,11 +35,6 @@ export default class CountdownTimer extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <h1>Get Ready!</h1>
-        {this.state.secondsLeft}
-      </div>
-    );
+    return <div>{this.state.secondsLeft}</div>;
   }
 }

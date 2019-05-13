@@ -6,6 +6,8 @@
   "dependencies": {
     "@tensorflow-models/posenet": "^1.0.2",
     "@tensorflow/tfjs": "^1.1.2",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "bootstrap": "^4.3.1",
     "compute-cosine-similarity": "^1.0.0",
     "express": "^4.16.4",
@@ -22,6 +24,8 @@
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "request": "^2.88.0"
   },
   "devDependencies": {

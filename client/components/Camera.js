@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
 import { detectPose, poseDetectionFrame } from '../poseNetFunc';
+import { connect } from 'react-redux';
 
 let stream = null;
 export let stop = null;
@@ -23,23 +24,23 @@ class PoseNet extends Component {
     imageScaleFactor: 0.5,
     skeletonColor: '#ffadea',
     skeletonLineWidth: 6,
-    loadingText: 'Loading...please be patient...'
+    loadingText: 'Loading...please be patient...',
   };
 
   constructor(props) {
     super(props, PoseNet.defaultProps);
     this.state = {
-      flag: true
+      flag: true,
     };
     this.detectPose = detectPose.bind(this);
   }
-
   getCanvas = elem => {
     this.canvas = elem;
   };
 
   getVideo = elem => {
     this.video = elem;
+    // console.log("in getVideo fn this refers to: ", this);
   };
 
   componentWillUnmount() {
@@ -93,8 +94,8 @@ class PoseNet extends Component {
       video: {
         facingMode: 'user',
         width: videoWidth,
-        height: videoHeight
-      }
+        height: videoHeight,
+      },
     });
 
     video.srcObject = stream;
@@ -121,6 +122,22 @@ class PoseNet extends Component {
     );
   }
 }
+
+const mapState = ( state, ownProps ) => ( {
+  countdown: state.countdown,
+  poseSequence: state.poseSequence,
+} );
+
+const mapDispatch = dispatch => ( {
+  checkPoseSuccess: ( result, confidence ) =>
+    dispatch( checkPoseSuccess( result, confidence ) ),
+  nextRound: poseSequence => dispatch( nextRound( poseSequence ) ),
+} );
+
+export default connect(
+  mapState,
+  mapDispatch
+)( PoseNet );
 
 export function toggleStop() {
   stop = true;

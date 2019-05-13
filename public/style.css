@@ -55,9 +55,9 @@
 }
 
 .cameraDiv {
-  position: absolute;
+  position: relative;
   left: 700px;
-  top: 475px;
+  top: 600px;
 }
 
 #results {
@@ -106,4 +106,8 @@ body {
 
 .homepage {
   margin-top: 75px;
+}
+
+.redBorder {
+  border: solid 5px red;
 }
