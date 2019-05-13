@@ -1,15 +1,8 @@
-/* eslint-disable no-inner-declarations */
-import { drawKeyPoints, drawSkeleton } from "./utils";
-import React, { Component } from "react";
-import * as posenet from "@tensorflow-models/posenet";
-import AllPoses from "./AllPoses";
-import { connect } from "react-redux";
-import GameFunctions from "./GameFunctions";
-import { checkPoseSuccess, nextRound } from "../store/game";
+//import { drawKeyPoints, drawSkeleton } from './utils';
+import React, { Component } from 'react';
+import * as posenet from '@tensorflow-models/posenet';
+import {detectPose, poseDetectionFrame} from '../poseNetFunc'
 
-//export let video;
-let result = "";
-let confidence = 0;
 class PoseNet extends Component {
   static defaultProps = {
     //video sizing variables
@@ -19,7 +12,6 @@ class PoseNet extends Component {
     algorithm: "single-pose",
     showVideo: true,
     showSkeleton: true,
-    //showPoints: true, // this is for face
     minPoseConfidence: 0.1, // at what accuracy of estimation you want to draw
     minPartConfidence: 0.5,
     maxPoseDetections: 2,
@@ -33,17 +25,10 @@ class PoseNet extends Component {
 
   constructor(props) {
     super(props, PoseNet.defaultProps);
-    this.state = {
-      result: "",
-      confidence: 0,
-      countdown: true
-    };
-    this.poseDetectionFrame = this.poseDetectionFrame.bind(this);
-    this.checkPose = this.checkPose.bind(this);
-  }
-  disableCountdown() {
-    console.log("all done!");
-    this.setState({ countdown: false });
+    this.state={
+      flag:true
+    }
+    this.detectPose = detectPose.bind(this)
   }
   getCanvas = elem => {
     this.canvas = elem;
@@ -73,7 +58,8 @@ class PoseNet extends Component {
       }, 200);
     }
 
-    this.detectPose();
+    let data = await this.detectPose(this.props,this.canvas,poseDetectionFrame,this.posenet,this.video);
+    console.log(data)
   }
 
   async setupCamera() {
@@ -97,7 +83,6 @@ class PoseNet extends Component {
     });
 
     video.srcObject = stream;
-
     return new Promise(resolve => {
       video.onloadedmetadata = () => {
         video.play();
@@ -105,162 +90,13 @@ class PoseNet extends Component {
       };
     });
   }
-  // this is setting up the canvas
-  detectPose() {
-    const { videoWidth, videoHeight } = this.props;
-    const canvas = this.canvas;
-    const canvasContext = canvas.getContext("2d");
-
-    canvas.width = videoWidth;
-    canvas.height = videoHeight;
-
-    this.poseDetectionFrame(canvasContext, this.checkPose);
-  }
-
-  poseDetectionFrame(canvasContext, checkPoseFn) {
-    const {
-      algorithm,
-      imageScaleFactor,
-      flipHorizontal,
-      outputStride,
-      minPoseConfidence,
-      minPartConfidence,
-      maxPoseDetections,
-      nmsRadius,
-      videoWidth,
-      videoHeight,
-      showVideo,
-      showPoints,
-      showSkeleton,
-      skeletonColor,
-      skeletonLineWidth
-    } = this.props;
-
-    const posenetModel = this.posenet;
-    const video = this.video;
-
-    const findPoseDetectionFrame = async () => {
-      let poses = [];
-
-      switch (algorithm) {
-        case "multi-pose": {
-          poses = await posenetModel.estimateMultiplePoses(
-            video,
-            imageScaleFactor,
-            flipHorizontal,
-            outputStride,
-            maxPoseDetections,
-            minPartConfidence,
-            nmsRadius
-          );
-          break;
-        }
-        case "single-pose": {
-          const knnClassifier = ml5.KNNClassifier();
-
-          //let poseNetml = ml5.poseNet(video, knnClassifier);
-          const pose = await posenetModel.estimateSinglePose(
-            video,
-            imageScaleFactor,
-            flipHorizontal,
-            outputStride
-          );
-          poses.push(pose);
-          //console.log('hello')
-          knnClassifier.load("/myKNN.json", classify);
-
-          async function classify() {
-            //console.log('hellow')
-            const numLabels = knnClassifier.getNumLabels();
-            if (numLabels <= 0) {
-              console.error("There is no examples in any label");
-              return;
-            }
-
-            const poseArray = poses[0].keypoints.map(p => [
-              p.score,
-              p.position.x,
-              p.position.y
-            ]);
-
-            let resultModel = await knnClassifier.classify(poseArray);
-            function gotResults(resultModel) {
-              result = "";
-              confidence = 0;
-
-              result = resultModel.label;
-              // this.setState({result: resultModel.label}) //this wasn't working
-              confidence = resultModel.confidencesByLabel[result];
-              checkPoseFn(result, confidence);
-              console.log(`here ${result} ${confidence}`);
-              // console.log("this refers to: ", this);
-              // this.checkPose(result, confidence); //machine doesn't know what this is referring to
-            }
-            gotResults(resultModel);
-          }
-          break;
-        }
-      }
-      canvasContext.clearRect(0, 0, videoWidth, videoHeight);
-
-      if (showVideo) {
-        canvasContext.save();
-        canvasContext.scale(-1, 1);
-        canvasContext.translate(-videoWidth, 0);
-        canvasContext.drawImage(video, 0, 0, videoWidth, videoHeight);
-        canvasContext.restore();
-      }
-
-      poses.forEach(({ score, keypoints }) => {
-        if (score >= minPoseConfidence) {
-          if (showPoints) {
-            drawKeyPoints(
-              keypoints,
-              minPartConfidence,
-              skeletonColor,
-              canvasContext
-            );
-          }
-          if (showSkeleton) {
-            drawSkeleton(
-              keypoints,
-              minPartConfidence,
-              skeletonColor,
-              skeletonLineWidth,
-              canvasContext
-            );
-          }
-        }
-      });
-      requestAnimationFrame(findPoseDetectionFrame);
-    };
-    findPoseDetectionFrame();
-  }
-
-  checkPose(result, confidence) {
-    console.log("we are checking if the pose is correct");
-    const { poseSequence, countdown } = this.props;
-    // start checking the pose once the countdown for the round/level of the game has begun
-    if (countdown) {
-      //if there's game-time left
-      for (let i = 0; i < poseSequence.length; i++) {
-        let currentPose = poseSequence[i];
-        this.props.checkPoseSuccess(result, confidence, currentPose, countdown);
-      }
-      this.props.nextRound(poseSequence);
-    }
-  }
 
   render() {
     return (
-      <div>
-        <div>
-          <video id="videoNoShow" playsInline ref={this.getVideo} />
-          <canvas className="webcam" ref={this.getCanvas} />
-          <p id="result">{this.state.result}</p>
-          <p id="confidence">{this.state.confidence}</p>
-        </div>
-      </div>
+        {this.state.flag ? <div>
+           <video id="videoNoShow" playsInline ref={this.getVideo} />
+           <canvas className="webcam" ref={this.getCanvas} />
+        </div> : <div>Result</div>}
     );
   }
 }
