@@ -1,6 +1,5 @@
 import React from 'react';
 import CountdownTimer from './CountdownTimer';
-import ResultPage from './ResultPage';
 import { connect } from 'react-redux';
 import { nextRound, beginCountdown } from '../store/game';
 
@@ -24,7 +23,6 @@ class GameFunctions extends React.Component {
     //        iii. repeat 5's logic until they complete all poses in the sequence successfully
     //    b. timeout / failure
 
-    // this.startFirstRound();
     this.props.nextRound(this.props.poseSequence);
   }
 
@@ -33,11 +31,6 @@ class GameFunctions extends React.Component {
       this.props.beginCountdown();
     }
   }
-
-  // startFirstRound() {
-  //   // this.props.createSequence();
-  //   this.props.nextRound(this.props.poseSequence);
-  // }
 
   beginNextRound() {
     if (!this.props.countdown && !this.props.gameOver) {
@@ -48,8 +41,6 @@ class GameFunctions extends React.Component {
   render() {
     return (
       <div>
-        {/* {this.props.gameOver ? <ResultPage /> : <div />} */}
-
         {this.props.countdown ? (
           <div className="countdownDiv">
             <h1>Do the pose!</h1>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from './Buttons';
 import { connect } from 'react-redux';
 import AllPoses from './AllPoses';
 import CountdownTimer from './CountdownTimer';

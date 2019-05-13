@@ -1,5 +1,3 @@
-import history from '../history';
-
 /**
  * ACTION TYPES
  */
@@ -36,32 +34,6 @@ const endCountdown = () => ({
 /**
  * THUNKS
  */
-// export const createSequence = currentSequence => {
-//   const randoPose = _getRandomPose();
-//   //this is not working bc state is only defined within the reducer...how can we get this to work??
-
-//   const poseToShowNum = Math.floor(Math.random() * 4);
-//   const poseToShow = state.poses[poseToShowNum];
-//   const poseSequenceArr = [];
-
-//   if (state.gameRound === 1 && !poseSequenceArr) {
-//     poseSequenceArr = poseToShow;
-//   } else {
-//     for (let i = 0; i <= state.gameRound; i++) {
-//       poseToShowNum = Math.floor(Math.random() * 4);
-//       poseToShow = state.poses[poseToShowNum];
-//       if (!poseSequenceArr) {
-//         poseSequenceArr = poseToShow;
-//       } else {
-//         poseSequenceArr.push(poseToShow);
-//       }
-//     }
-//   }
-//   showSequence(poseSequenceArr);
-//   //increase the round by 1
-//   const nextRound = state.gameRound + 1;
-//   nextGameRound(nextRound);
-// };
 
 function _getRandomPose() {
   const poses = ['TreePose', 'GarlandPose', 'MountainPose', 'ShivaTwist'];
@@ -71,19 +43,20 @@ function _getRandomPose() {
 }
 
 export const beginCountdown = () => {
-  //this does not have an ACTION type associated, just undefined
   return dispatch => {
     dispatch(startCountdown());
     setTimeout(() => {
       dispatch({
         type: DISABLE_COUNTDOWN,
       });
-    }, 10000); //unexpected timeout error
+    }, 10000);
   };
 };
 
 export const disableCountdown = () => {
-  dispatch(endCountdown()); //why does this one not have a return dispatch fn?
+  return dispatch => {
+    dispatch(endCountdown());
+  };
 };
 
 export const checkPoseSuccess = (result, confidence, currPose, countdown) => {
@@ -99,9 +72,6 @@ export const checkPoseSuccess = (result, confidence, currPose, countdown) => {
       console.log('Success.. Pose done! move to next level');
       dispatch(poseSuccess());
     }
-    // if (!countdown) {
-    //   dispatch(gameOver());
-    // }
   };
 };
 
@@ -111,17 +81,9 @@ export const gameOverThunk = () => {
   };
 };
 
-export const nextRound = poseSequence => {
+export const nextRound = () => {
   return dispatch => {
-    //this did not have an action type associated, it was undefined
-    //does this need poseSequence passed in as an argument?
-    // if (poseSequence.length === 10) {
-    // console.log('we got into the if the pose sequence is equal to 10');
-    // dispatch(gameOver());
-    // } else {
-    // console.log("we got into the place where we update the sequence");
     dispatch(updateSequence());
-    // }
   };
 };
 
