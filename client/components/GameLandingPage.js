@@ -33,9 +33,11 @@ class GameLandingPage extends React.Component {
   }
 
   render() {
+    const isGameRound11 = this.props.gameRound === 11;
+    const showResultPage = isGameRound11 || this.props.gameOver;
     return (
       <div>
-        {this.props.gameOver ? (
+        {showResultPage ? (
           <ResultPage />
         ) : (
           /* only when the countdown is done and the camera has loaded, do we want the game functions to begin running */
@@ -58,6 +60,7 @@ class GameLandingPage extends React.Component {
 
 const mapState = state => ({
   gameOver: state.gameOver,
+  gameRound: state.gameRound,
 });
 
 export default connect(mapState)(GameLandingPage);
