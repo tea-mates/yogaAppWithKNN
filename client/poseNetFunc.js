@@ -3,6 +3,8 @@ import { compareObj, flatImageData, parts } from './Data/finalData';
 import { normArrGen } from './Data/flatArrGen';
 import { compare, cosineDistanceMatching } from './cosineFunc';
 import { stop } from './components/Camera';
+import {gotResult} from './store/trainer'
+import store from './store';
 
 export function detectPose(
   props,
@@ -70,8 +72,10 @@ export function poseDetectionFrame(canvasContext, props, posenet, argvideo) {
 
         let minCosineDistance = compare(normArray1, flatRefImage);
         if (minCosineDistance > 0.4) {
+          store.dispatch(gotResult('BadPose',minCosineDistance))
           console.log(`Bad Pose`);
         } else {
+          store.dispatch(gotResult(compareObj[index].pose,minCosineDistance))
           console.log(
             `Pose is ${compareObj[index].pose} and points ${minCosineDistance}`
           );
