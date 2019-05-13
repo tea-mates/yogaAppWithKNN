@@ -75,7 +75,7 @@ class PoseNet extends Component {
       this.posenet,
       this.video
     );
-    setTimeout(toggleStop, 5000);
+    setTimeout(toggleStop, 11000);
   }
 
   async setupCamera() {
@@ -123,21 +123,21 @@ class PoseNet extends Component {
   }
 }
 
-const mapState = ( state, ownProps ) => ( {
-  countdown: state.countdown,
-  poseSequence: state.poseSequence,
-} );
+const mapState = (state, ownProps) => ({
+  countdown: state.gameReducer.countdown,
+  poseSequence: state.gameReducer.poseSequence,
+});
 
-const mapDispatch = dispatch => ( {
-  checkPoseSuccess: ( result, confidence ) =>
-    dispatch( checkPoseSuccess( result, confidence ) ),
-  nextRound: poseSequence => dispatch( nextRound( poseSequence ) ),
-} );
+const mapDispatch = dispatch => ({
+  checkPoseSuccess: (result, confidence) =>
+    dispatch(checkPoseSuccess(result, confidence)),
+  nextRound: poseSequence => dispatch(nextRound(poseSequence)),
+});
 
 export default connect(
   mapState,
   mapDispatch
-)( PoseNet );
+)(PoseNet);
 
 export function toggleStop() {
   stop = true;

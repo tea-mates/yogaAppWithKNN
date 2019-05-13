@@ -55,10 +55,10 @@ class GameFunctions extends React.Component {
 }
 
 const mapState = state => ({
-  countdown: state.countdown,
-  poseSuccess: state.poseSuccess,
-  gameOver: state.gameOver,
-  poseSequence: state.poseSequence,
+  countdown: state.gameReducer.countdown,
+  poseSuccess: state.gameReducer.poseSuccess,
+  gameOver: state.gameReducer.gameOver,
+  poseSequence: state.gameReducer.poseSequence,
 });
 
 const mapDispatch = dispatch => ({
