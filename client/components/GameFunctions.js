@@ -52,6 +52,7 @@ class GameFunctions extends React.Component {
 
         {this.props.countdown ? (
           <div className="countdownDiv">
+            <h1>Do the pose!</h1>
             <CountdownTimer />
           </div>
         ) : (

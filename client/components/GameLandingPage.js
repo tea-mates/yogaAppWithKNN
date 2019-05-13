@@ -43,10 +43,19 @@ class GameLandingPage extends React.Component {
           /* only when the countdown is done and the camera has loaded, do we want the game functions to begin running */
           <div>
             <div className="countdownDiv">
-              {this.state.startGame ? <GameFunctions /> : <CountdownTimer />}
+              {this.state.startGame ? (
+                <GameFunctions />
+              ) : (
+                <div>
+                  <h1>Get ready!</h1>
+                  <CountdownTimer />
+                </div>
+              )}
             </div>
 
-            <div>{this.state.loadCamera ? <Camera /> : <div />}</div>
+            <div className="cameraDiv">
+              {this.state.loadCamera ? <Camera /> : <div />}
+            </div>
 
             <div className="allPosesDiv">
               <AllPoses />
