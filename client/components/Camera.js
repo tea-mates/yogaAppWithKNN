@@ -124,8 +124,8 @@ class PoseNet extends Component {
 }
 
 const mapState = (state, ownProps) => ({
-  countdown: state.countdown,
-  poseSequence: state.poseSequence,
+  countdown: state.gameReducer.countdown,
+  poseSequence: state.gameReducer.poseSequence,
 });
 
 const mapDispatch = dispatch => ({

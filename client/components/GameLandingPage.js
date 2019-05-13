@@ -67,8 +67,8 @@ class GameLandingPage extends React.Component {
 }
 
 const mapState = state => ({
-  gameOver: state.gameOver,
-  gameRound: state.gameRound,
+  gameOver: state.gameReducer.gameOver,
+  gameRound: state.gameReducer.gameRound,
 });
 
 export default connect(mapState)(GameLandingPage);

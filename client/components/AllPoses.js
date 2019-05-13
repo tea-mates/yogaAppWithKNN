@@ -37,8 +37,8 @@ class AllPoses extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const poseWasAdded =
-      prevProps.poseSequence.length !== this.props.poseSequence.length;
+    const { poseSequence } = this.props;
+    const poseWasAdded = prevProps.poseSequence.length !== poseSequence.length;
     if (poseWasAdded) {
       this.showSequence();
     }
@@ -71,7 +71,6 @@ class AllPoses extends React.Component {
 
   render() {
     const { gameRound } = this.props;
-    const isZero = gameRound ? 0 : 1;
 
     return (
       <div>
@@ -97,8 +96,8 @@ class AllPoses extends React.Component {
 }
 
 const mapState = state => ({
-  poseSequence: state.poseSequence,
-  gameRound: state.gameRound,
+  poseSequence: state.gameReducer.poseSequence,
+  gameRound: state.gameReducer.gameRound,
 });
 
 const mapDispatchToProps = dispatch => ({
