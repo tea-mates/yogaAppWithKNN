@@ -143,4 +143,4 @@ export function toggleStop() {
   stop = true;
 }
 
-export default PoseNet;
+// export default PoseNet;
