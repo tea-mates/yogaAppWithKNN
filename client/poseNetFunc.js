@@ -2,7 +2,7 @@ import { drawKeyPoints, drawSkeleton } from './components/utils';
 import { compareObj, flatImageData, parts } from './Data/finalData';
 import { normArrGen } from './Data/flatArrGen';
 import { compare, cosineDistanceMatching } from './cosineFunc';
-import { stopPosenet } from './components/Camera';
+import { stop } from './components/Camera';
 
 export function detectPose(
   props,
@@ -110,8 +110,9 @@ export function poseDetectionFrame(canvasContext, props, posenet, argvideo) {
         }
       }
     });
-    requestAnimationFrame(findPoseDetectionFrame);
+    if (!stop) requestAnimationFrame(findPoseDetectionFrame);
   };
 
   findPoseDetectionFrame();
 }
+

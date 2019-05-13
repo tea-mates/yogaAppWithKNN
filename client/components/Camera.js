@@ -4,7 +4,7 @@ import * as posenet from '@tensorflow-models/posenet';
 import { detectPose, poseDetectionFrame } from '../poseNetFunc';
 
 let stream = null;
-export let stopPosenet = null;
+export let stop = null;
 
 class PoseNet extends Component {
   static defaultProps = {
@@ -45,7 +45,7 @@ class PoseNet extends Component {
   componentWillUnmount() {
     let track = stream.getTracks()[0];
     track.stop();
-    stopPosenet = false;
+    stop = true;
   }
 
   async componentDidMount() {
@@ -74,6 +74,7 @@ class PoseNet extends Component {
       this.posenet,
       this.video
     );
+    setTimeout(toggleStop, 5000);
   }
 
   async setupCamera() {
@@ -119,6 +120,10 @@ class PoseNet extends Component {
       </div>
     );
   }
+}
+
+export function toggleStop() {
+  stop = true;
 }
 
 export default PoseNet;
