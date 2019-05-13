@@ -71,19 +71,19 @@ function _getRandomPose() {
 }
 
 export const beginCountdown = () => {
+  //this does not have an ACTION type associated, just undefined
   return dispatch => {
     dispatch(startCountdown());
-    // WHERE TO GO FROM HERE ???
-    setTimeout(dispatch(endCountdown()), 10000);
+    setTimeout(dispatch(endCountdown()), 10000); //unexpected timeout error
   };
 };
 
 export const disableCountdown = () => {
-  dispatch(endCountdown());
+  dispatch(endCountdown()); //why does this one not have a return dispatch fn?
 };
 
 export const checkPoseSuccess = (result, confidence, currPose, countdown) => {
-  console.log("You have to do -->", poseToShow);
+  // console.log("You have to do -->", poseToShow);
   return dispatch => {
     // const poseSequenceArr = state.poseSequence;
     // const l = poseSequenceArr.length;
@@ -103,10 +103,13 @@ export const checkPoseSuccess = (result, confidence, currPose, countdown) => {
 
 export const nextRound = poseSequence => {
   return dispatch => {
+    //this did not have an action type associated, it was undefined
     //does this need poseSequence passed in as an argument?
     if (poseSequence.length === 10) {
+      console.log("we got into the if the pose sequence is equal to 10");
       dispatch(gameOver());
     } else {
+      // console.log("we got into the place where we update the sequence");
       dispatch(updateSequence());
     }
   };

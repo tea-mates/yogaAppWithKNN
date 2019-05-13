@@ -2,7 +2,7 @@ import React from "react";
 import CountdownTimer from "./CountdownTimer";
 import ResultPage from "./ResultPage";
 import { connect } from "react-redux";
-import { createSequence, nextRound, beginCountdown } from "../store/game";
+import { nextRound, beginCountdown } from "../store/game";
 
 class GameFunctions extends React.Component {
   constructor(props) {
@@ -18,10 +18,12 @@ class GameFunctions extends React.Component {
     //    - this happens in AllPoses.js
     // 4. once displayed, start countdown timer
     // 5. during the countdown, user does the pose
-    //    a. complete successfully
+    //    a. complete the pose successfully
+    //        i. the first pose box is checked off
+    //        ii. the countdown resets, the user continues to try to do the next pose in the sequence
+    //        iii. repeat 5's logic until they complete all poses in the sequence successfully
     //    b. timeout / failure
 
-    // this.props.createSequence();
     this.startFirstRound();
   }
 
@@ -67,7 +69,6 @@ const mapState = state => ({
 });
 
 const mapDispatch = dispatch => ({
-  createSequence: () => dispatch(createSequence()),
   nextRound: poseSequence => dispatch(nextRound(poseSequence)),
   beginCountdown: () => dispatch(beginCountdown())
 });

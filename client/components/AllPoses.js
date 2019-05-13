@@ -4,18 +4,16 @@ import { beginCountdown } from "../store/game";
 
 const poses = [
   {
-    name: "MountainPose",
+    name: "MountainPose", //the images need to be updated
     imageUrl:
-      "https://live.staticflickr.com/65535/33935797398_279eda570c_z.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Mr-yoga-mountain-pose-bound_hands.jpg/747px-Mr-yoga-mountain-pose-bound_hands.jpg",
     highlight:
-      "https://live.staticflickr.com/65535/33935797398_279eda570c_z.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/6/69/Mountain_Pose.jpg"
   },
   {
     name: "HalfMoonPose",
-    imageUrl:
-      "https://live.staticflickr.com/65535/47812849101_0fba3078a6_z.jpg",
-    highlight:
-      "https://live.staticflickr.com/65535/47812849101_0fba3078a6_z.jpg"
+    imageUrl: "https://i.imgur.com/VKn1Z7q.png",
+    highlight: "https://i.imgur.com/BcCk6qt.png"
   },
   {
     name: "GarlandPose",
@@ -23,11 +21,11 @@ const poses = [
     highlight: "https://i.imgur.com/bhP3AYN.png"
   },
   {
-    name: "TreePose",
+    name: "TreePose", //the images need to be updated
     imageUrl:
-      "https://st4.depositphotos.com/5130171/19866/v/1600/depositphotos_198661934-stock-illustration-child-doing-yoga-half-moon.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Tree_pose.JPG/428px-Tree_pose.JPG",
     highlight:
-      "https://st4.depositphotos.com/5130171/19866/v/1600/depositphotos_198661934-stock-illustration-child-doing-yoga-half-moon.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/b/ba/Tree_Pose_with_the_trees%21.jpg"
   }
 ];
 
@@ -55,9 +53,9 @@ class AllPoses extends React.Component {
     const { poseTimeframeMs } = this.state;
     const l = poseSequence.length;
     for (let i = 0; i < l; i++) {
-      (function(i) {
+      (i => {
         //this anon fn slows down the for loop
-        setTimeout(function() {
+        setTimeout(() => {
           let currPose = poseSequence[i];
           this.setState({ poseBeingHighlighted: currPose });
         }, poseTimeframeMs * i);
@@ -67,7 +65,7 @@ class AllPoses extends React.Component {
     this.setState({ poseBeingHighlighted: "" });
 
     //will need to state the countdown once sequence of poses is show to the user
-    beginCountdown();
+    if (this.state.poseBeingHighlighted === "") beginCountdown();
   };
 
   render() {

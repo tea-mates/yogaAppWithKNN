@@ -51,6 +51,7 @@ class PoseNet extends Component {
 
   getVideo = elem => {
     this.video = elem;
+    // console.log("in getVideo fn this refers to: ", this);
   };
 
   async componentDidMount() {
@@ -113,10 +114,10 @@ class PoseNet extends Component {
     canvas.width = videoWidth;
     canvas.height = videoHeight;
 
-    this.poseDetectionFrame(canvasContext);
+    this.poseDetectionFrame(canvasContext, this.checkPose);
   }
 
-  poseDetectionFrame(canvasContext) {
+  poseDetectionFrame(canvasContext, checkPoseFn) {
     const {
       algorithm,
       imageScaleFactor,
@@ -190,8 +191,10 @@ class PoseNet extends Component {
               result = resultModel.label;
               // this.setState({result: resultModel.label}) //this wasn't working
               confidence = resultModel.confidencesByLabel[result];
+              checkPoseFn(result, confidence);
               console.log(`here ${result} ${confidence}`);
-              this.checkPose(result, confidence);
+              // console.log("this refers to: ", this);
+              // this.checkPose(result, confidence); //machine doesn't know what this is referring to
             }
             gotResults(resultModel);
           }
@@ -235,6 +238,7 @@ class PoseNet extends Component {
   }
 
   checkPose(result, confidence) {
+    console.log("we are checking if the pose is correct");
     const { poseSequence, countdown } = this.props;
     // start checking the pose once the countdown for the round/level of the game has begun
     if (countdown) {
