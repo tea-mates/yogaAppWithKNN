@@ -60,7 +60,7 @@ export function poseDetectionFrame(canvasContext,props,posenet,argvideo) {
         let normArray1 = normArrGen(poses)
 
         let cosineDistance = compare(normArray1,flatImageData)
-        console.log(cosineDistance)
+        //console.log(cosineDistance)
         let minCosineDistance = Math.min(...cosineDistance)
         if(minCosineDistance>0.4){
           console.log(`Bad Pose`)
@@ -106,5 +106,4 @@ export function poseDetectionFrame(canvasContext,props,posenet,argvideo) {
     requestAnimationFrame(findPoseDetectionFrame);
   };
   findPoseDetectionFrame();
-  return result
 }
