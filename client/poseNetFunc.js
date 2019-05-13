@@ -42,9 +42,6 @@ export function poseDetectionFrame(canvasContext,props,posenet,argvideo) {
     switch (algorithm) {
 
       case 'single-pose': {
-        //const knnClassifier = ml5.KNNClassifier();
-
-        //let poseNetml = ml5.poseNet(video, knnClassifier);
         const pose = await posenetModel.estimateSinglePose(
           video,
           imageScaleFactor,
@@ -61,8 +58,6 @@ export function poseDetectionFrame(canvasContext,props,posenet,argvideo) {
         let normArray1 = normArrGen(poses)
 
         let minCosineDistance = compare(normArray1,flatRefImage)
-        //console.log(cosineDistance)
-        //let minCosineDistance = Math.min(...cosineDistance)
         if(minCosineDistance>0.4){
           console.log(`Bad Pose`)
         }else{
