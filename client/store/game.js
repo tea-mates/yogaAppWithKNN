@@ -1,36 +1,36 @@
-import history from "../history";
+import history from '../history';
 
 /**
  * ACTION TYPES
  */
-const START_GAME = "START_GAME";
-const END_GAME = "END_GAME";
-const SUCCESS = "SUCCESS";
+const START_GAME = 'START_GAME';
+const END_GAME = 'END_GAME';
+const SUCCESS = 'SUCCESS';
 // const FAILED = "FAILED";
-const DISABLE_COUNTDOWN = "DISABLE_COUNTDOWN";
-const UPDATE_SEQUENCE = "UPDATE_SEQUENCE";
+const DISABLE_COUNTDOWN = 'DISABLE_COUNTDOWN';
+const UPDATE_SEQUENCE = 'UPDATE_SEQUENCE';
 
 /**
  * ACTION CREATORS
  */
 const poseSuccess = () => ({
-  type: SUCCESS
+  type: SUCCESS,
 });
 
 const gameOver = () => ({
-  type: DISABLE_COUNTDOWN
+  type: DISABLE_COUNTDOWN,
 });
 
 const updateSequence = () => ({
-  type: UPDATE_SEQUENCE
+  type: UPDATE_SEQUENCE,
 });
 
 const startCountdown = () => ({
-  type: START_GAME
+  type: START_GAME,
 });
 
 const endCountdown = () => ({
-  type: END_GAME
+  type: END_GAME,
 });
 
 /**
@@ -64,7 +64,7 @@ const endCountdown = () => ({
 // };
 
 function _getRandomPose() {
-  const poses = ["MountainPose", "HalfMoonPose", "GarlandPose", "TreePose"];
+  const poses = ['TreePose', 'GarlandPose', 'MountainPose', 'ShivaTwist'];
   const poseToShowNum = Math.floor(Math.random() * 4);
   const poseToShow = poses[poseToShowNum];
   return poseToShow;
@@ -92,7 +92,7 @@ export const checkPoseSuccess = (result, confidence, currPose, countdown) => {
     if (currPose === result && confidence > 0.3) {
       //do we need the confidence score for this game???
       // i am not sure if we will want to use the confidence score as a measure of success since it is inconsistent
-      console.log("Success.. Pose done! move to next level");
+      console.log('Success.. Pose done! move to next level');
       dispatch(poseSuccess());
     }
     if (!countdown) {
@@ -106,7 +106,7 @@ export const nextRound = poseSequence => {
     //this did not have an action type associated, it was undefined
     //does this need poseSequence passed in as an argument?
     if (poseSequence.length === 10) {
-      console.log("we got into the if the pose sequence is equal to 10");
+      console.log('we got into the if the pose sequence is equal to 10');
       dispatch(gameOver());
     } else {
       // console.log("we got into the place where we update the sequence");
@@ -119,12 +119,12 @@ export const nextRound = poseSequence => {
  * INITIAL STATE
  */
 const defaultGame = {
-  poses: ["MountainPose", "HalfMoonPose", "GarlandPose", "TreePose"],
+  poses: ['TreePose', 'GarlandPose', 'MountainPose', 'ShivaTwist'],
   countdown: false,
   gameRound: 0,
   poseSequence: [],
   poseSuccess: false, //did they succeed to do the current pose
-  gameOver: false //set this to true if you reach 10 poses or you fail a pose
+  gameOver: false, //set this to true if you reach 10 poses or you fail a pose
 };
 
 /**
@@ -144,7 +144,7 @@ export default function(state = defaultGame, action) {
       return {
         ...state,
         poseSequence: [...state.poseSequence, _getRandomPose()],
-        gameRound: state.gameRound + 1
+        gameRound: state.gameRound + 1,
       };
     default:
       return state;
