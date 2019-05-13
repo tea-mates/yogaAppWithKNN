@@ -4,6 +4,9 @@ import * as posenet from '@tensorflow-models/posenet';
 import { detectPose, poseDetectionFrame } from '../poseNetFunc';
 import { connect } from 'react-redux';
 
+let stream = null;
+export let stop = null;
+
 class PoseNet extends Component {
   static defaultProps = {
     //video sizing variables
@@ -40,6 +43,12 @@ class PoseNet extends Component {
     // console.log("in getVideo fn this refers to: ", this);
   };
 
+  componentWillUnmount() {
+    let track = stream.getTracks()[0];
+    track.stop();
+    stop = true;
+  }
+
   async componentDidMount() {
     try {
       await this.setupCamera();
@@ -66,6 +75,7 @@ class PoseNet extends Component {
       this.posenet,
       this.video
     );
+    setTimeout(toggleStop, 5000);
   }
 
   async setupCamera() {
@@ -79,7 +89,7 @@ class PoseNet extends Component {
     video.width = videoWidth;
     video.height = videoHeight;
 
-    const stream = await navigator.mediaDevices.getUserMedia({
+    stream = await navigator.mediaDevices.getUserMedia({
       audio: false,
       video: {
         facingMode: 'user',
@@ -113,18 +123,24 @@ class PoseNet extends Component {
   }
 }
 
-const mapState = (state, ownProps) => ({
+const mapState = ( state, ownProps ) => ( {
   countdown: state.countdown,
   poseSequence: state.poseSequence,
-});
+} );
 
-const mapDispatch = dispatch => ({
-  checkPoseSuccess: (result, confidence) =>
-    dispatch(checkPoseSuccess(result, confidence)),
-  nextRound: poseSequence => dispatch(nextRound(poseSequence)),
-});
+const mapDispatch = dispatch => ( {
+  checkPoseSuccess: ( result, confidence ) =>
+    dispatch( checkPoseSuccess( result, confidence ) ),
+  nextRound: poseSequence => dispatch( nextRound( poseSequence ) ),
+} );
 
 export default connect(
   mapState,
   mapDispatch
-)(PoseNet);
+)( PoseNet );
+
+export function toggleStop() {
+  stop = true;
+}
+
+export default PoseNet;

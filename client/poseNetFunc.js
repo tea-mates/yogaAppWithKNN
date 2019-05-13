@@ -2,6 +2,9 @@ import { drawKeyPoints, drawSkeleton } from './components/utils';
 import { compareObj, flatImageData, parts } from './Data/finalData';
 import { normArrGen } from './Data/flatArrGen';
 import { compare, cosineDistanceMatching } from './cosineFunc';
+import { stop } from './components/Camera';
+import { gotResult } from './store/trainer';
+import store from './store';
 
 export function detectPose(
   props,
@@ -12,6 +15,7 @@ export function detectPose(
 ) {
   const { videoWidth, videoHeight } = props;
   const canvas = argcanvas;
+
   const canvasContext = canvas.getContext('2d');
 
   canvas.width = videoWidth;
@@ -59,7 +63,7 @@ export function poseDetectionFrame(canvasContext, props, posenet, argvideo) {
           'MountainPose',
           'ShivaTwist',
         ];
-        //this has been added to the redux game store
+
         let index = refPoses.indexOf('TreePose');
 
         let flatRefImage = flatImageData[index];
@@ -67,10 +71,11 @@ export function poseDetectionFrame(canvasContext, props, posenet, argvideo) {
         let normArray1 = normArrGen(poses);
 
         let minCosineDistance = compare(normArray1, flatRefImage);
-
         if (minCosineDistance > 0.4) {
+          store.dispatch(gotResult('BadPose', minCosineDistance));
           console.log(`Bad Pose`);
         } else {
+          store.dispatch(gotResult(compareObj[index].pose, minCosineDistance));
           console.log(
             `Pose is ${compareObj[index].pose} and points ${minCosineDistance}`
           );
@@ -109,7 +114,8 @@ export function poseDetectionFrame(canvasContext, props, posenet, argvideo) {
         }
       }
     });
-    requestAnimationFrame(findPoseDetectionFrame);
+    if (!stop) requestAnimationFrame(findPoseDetectionFrame);
   };
+
   findPoseDetectionFrame();
 }
