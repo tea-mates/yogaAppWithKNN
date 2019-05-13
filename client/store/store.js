@@ -1,9 +1,9 @@
-import loggerMiddleware from "redux-logger";
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import reducer from "./game";
+import loggerMiddleware from 'redux-logger';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducer from './game';
 
-const store = createStore(reducer, applyMiddleware(loggerMiddleware, thunk));
+const store = createStore(reducer, applyMiddleware(thunk, loggerMiddleware));
 
 // const store = createStore(reducer);
 

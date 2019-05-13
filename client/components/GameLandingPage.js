@@ -1,9 +1,11 @@
 import React from 'react';
 import { Button } from './Buttons';
+import { connect } from 'react-redux';
 import AllPoses from './AllPoses';
 import CountdownTimer from './CountdownTimer';
 import Camera from './Camera';
 import GameFunctions from './GameFunctions';
+import ResultPage from './ResultPage';
 
 class GameLandingPage extends React.Component {
   constructor(props) {
@@ -33,7 +35,7 @@ class GameLandingPage extends React.Component {
   render() {
     return (
       <div>
-        {this.state.gameOver ? (
+        {this.props.gameOver ? (
           <ResultPage />
         ) : (
           /* only when the countdown is done and the camera has loaded, do we want the game functions to begin running */
@@ -54,4 +56,8 @@ class GameLandingPage extends React.Component {
   }
 }
 
-export default GameLandingPage;
+const mapState = state => ({
+  gameOver: state.gameOver,
+});
+
+export default connect(mapState)(GameLandingPage);

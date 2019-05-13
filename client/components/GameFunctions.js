@@ -1,8 +1,8 @@
-import React from "react";
-import CountdownTimer from "./CountdownTimer";
-import ResultPage from "./ResultPage";
-import { connect } from "react-redux";
-import { nextRound, beginCountdown } from "../store/game";
+import React from 'react';
+import CountdownTimer from './CountdownTimer';
+import ResultPage from './ResultPage';
+import { connect } from 'react-redux';
+import { nextRound, beginCountdown } from '../store/game';
 
 class GameFunctions extends React.Component {
   constructor(props) {
@@ -24,7 +24,8 @@ class GameFunctions extends React.Component {
     //        iii. repeat 5's logic until they complete all poses in the sequence successfully
     //    b. timeout / failure
 
-    this.startFirstRound();
+    // this.startFirstRound();
+    this.props.nextRound(this.props.poseSequence);
   }
 
   componentDidUpdate() {
@@ -33,10 +34,10 @@ class GameFunctions extends React.Component {
     }
   }
 
-  startFirstRound() {
-    // this.props.createSequence();
-    this.props.nextRound(this.props.poseSequence);
-  }
+  // startFirstRound() {
+  //   // this.props.createSequence();
+  //   this.props.nextRound(this.props.poseSequence);
+  // }
 
   beginNextRound() {
     if (!this.props.countdown && !this.props.gameOver) {
@@ -47,7 +48,7 @@ class GameFunctions extends React.Component {
   render() {
     return (
       <div>
-        {this.props.gameOver ? <ResultPage /> : <div />}
+        {/* {this.props.gameOver ? <ResultPage /> : <div />} */}
 
         {this.props.countdown ? (
           <div className="countdownDiv">
@@ -65,12 +66,12 @@ const mapState = state => ({
   countdown: state.countdown,
   poseSuccess: state.poseSuccess,
   gameOver: state.gameOver,
-  poseSequence: state.poseSequence
+  poseSequence: state.poseSequence,
 });
 
 const mapDispatch = dispatch => ({
   nextRound: poseSequence => dispatch(nextRound(poseSequence)),
-  beginCountdown: () => dispatch(beginCountdown())
+  beginCountdown: () => dispatch(beginCountdown()),
 });
 
 export default connect(

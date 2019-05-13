@@ -53,9 +53,14 @@ export function poseDetectionFrame(canvasContext, props, posenet, argvideo) {
           outputStride
         );
         poses.push(pose);
-        // let refPoses = ['TreePose','GarlandPose','MountainPose','ShivaTwist']
+        let refPoses = [
+          'TreePose',
+          'GarlandPose',
+          'MountainPose',
+          'ShivaTwist',
+        ];
         //this has been added to the redux game store
-        // let index = refPoses.indexOf('TreePose');
+        let index = refPoses.indexOf('TreePose');
 
         let flatRefImage = flatImageData[index];
 

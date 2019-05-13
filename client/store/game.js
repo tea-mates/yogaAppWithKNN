@@ -74,7 +74,11 @@ export const beginCountdown = () => {
   //this does not have an ACTION type associated, just undefined
   return dispatch => {
     dispatch(startCountdown());
-    setTimeout(dispatch(endCountdown()), 10000); //unexpected timeout error
+    setTimeout(() => {
+      dispatch({
+        type: DISABLE_COUNTDOWN,
+      });
+    }, 10000); //unexpected timeout error
   };
 };
 
@@ -95,9 +99,15 @@ export const checkPoseSuccess = (result, confidence, currPose, countdown) => {
       console.log('Success.. Pose done! move to next level');
       dispatch(poseSuccess());
     }
-    if (!countdown) {
-      dispatch(gameOver());
-    }
+    // if (!countdown) {
+    //   dispatch(gameOver());
+    // }
+  };
+};
+
+export const gameOverThunk = () => {
+  return dispatch => {
+    dispatch(gameOver());
   };
 };
 
@@ -105,13 +115,13 @@ export const nextRound = poseSequence => {
   return dispatch => {
     //this did not have an action type associated, it was undefined
     //does this need poseSequence passed in as an argument?
-    if (poseSequence.length === 10) {
-      console.log('we got into the if the pose sequence is equal to 10');
-      dispatch(gameOver());
-    } else {
-      // console.log("we got into the place where we update the sequence");
-      dispatch(updateSequence());
-    }
+    // if (poseSequence.length === 10) {
+    // console.log('we got into the if the pose sequence is equal to 10');
+    // dispatch(gameOver());
+    // } else {
+    // console.log("we got into the place where we update the sequence");
+    dispatch(updateSequence());
+    // }
   };
 };
 
