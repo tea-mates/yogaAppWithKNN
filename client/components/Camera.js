@@ -1,7 +1,10 @@
 //import { drawKeyPoints, drawSkeleton } from './utils';
 import React, { Component } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
-import {detectPose,poseDetectionFrame} from '../poseNetFunc'
+import { detectPose, poseDetectionFrame } from '../poseNetFunc';
+
+let stream = null;
+export let stop = null;
 
 class PoseNet extends Component {
   static defaultProps = {
@@ -25,10 +28,10 @@ class PoseNet extends Component {
 
   constructor(props) {
     super(props, PoseNet.defaultProps);
-    this.state={
-      flag:true
-    }
-    this.detectPose = detectPose.bind(this)
+    this.state = {
+      flag: true
+    };
+    this.detectPose = detectPose.bind(this);
   }
 
   getCanvas = elem => {
@@ -38,6 +41,12 @@ class PoseNet extends Component {
   getVideo = elem => {
     this.video = elem;
   };
+
+  componentWillUnmount() {
+    let track = stream.getTracks()[0];
+    track.stop();
+    stop = true;
+  }
 
   async componentDidMount() {
     try {
@@ -58,7 +67,14 @@ class PoseNet extends Component {
       }, 200);
     }
 
-    this.detectPose(this.props,this.canvas,poseDetectionFrame,this.posenet,this.video);
+    this.detectPose(
+      this.props,
+      this.canvas,
+      poseDetectionFrame,
+      this.posenet,
+      this.video
+    );
+    setTimeout(toggleStop, 5000);
   }
 
   async setupCamera() {
@@ -72,7 +88,7 @@ class PoseNet extends Component {
     video.width = videoWidth;
     video.height = videoHeight;
 
-    const stream = await navigator.mediaDevices.getUserMedia({
+    stream = await navigator.mediaDevices.getUserMedia({
       audio: false,
       video: {
         facingMode: 'user',
@@ -93,13 +109,21 @@ class PoseNet extends Component {
   render() {
     return (
       <div>
-        {this.state.flag ? <div>
-           <video id="videoNoShow" playsInline ref={this.getVideo} />
-           <canvas className="webcam" ref={this.getCanvas} />
-        </div> : <div>Result</div>}
+        {this.state.flag ? (
+          <div>
+            <video id="videoNoShow" playsInline ref={this.getVideo} />
+            <canvas className="webcam" ref={this.getCanvas} />
+          </div>
+        ) : (
+          <div>Result</div>
+        )}
       </div>
     );
   }
+}
+
+export function toggleStop() {
+  stop = true;
 }
 
 export default PoseNet;
