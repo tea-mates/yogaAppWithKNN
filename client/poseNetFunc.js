@@ -1,8 +1,6 @@
 
 import { drawKeyPoints, drawSkeleton } from './components/utils';
-//import {normArray,flatnormArray} from './Data/treePoseData'
 import {compareObj,flatImageData,parts} from './Data/finalData'
-//import similarity from 'compute-cosine-similarity'
 import {normArrGen} from './Data/flatArrGen'
 import {compare,cosineDistanceMatching} from './cosineFunc'
 
@@ -14,7 +12,7 @@ export function detectPose(props,argcanvas,poseDetectionFrame,posenet,video) {
   canvas.width = videoWidth;
   canvas.height = videoHeight;
 
-  return poseDetectionFrame(canvasContext,props,posenet,video);
+  poseDetectionFrame(canvasContext,props,posenet,video);
 }
 
 export function poseDetectionFrame(canvasContext,props,posenet,argvideo) {
@@ -38,7 +36,6 @@ export function poseDetectionFrame(canvasContext,props,posenet,argvideo) {
 
   const posenetModel = posenet;
   const video = argvideo;
-  let result;
   const findPoseDetectionFrame = async () => {
     let poses = [];
 
@@ -55,18 +52,20 @@ export function poseDetectionFrame(canvasContext,props,posenet,argvideo) {
           outputStride
         );
         poses.push(pose);
+        let refPoses = ['TreePose','GarlandPose','MountainPose','ShivaTwist']
 
+        let index = refPoses.indexOf('TreePose')
+
+        let flatRefImage = flatImageData[index]
 
         let normArray1 = normArrGen(poses)
 
-        let cosineDistance = compare(normArray1,flatImageData)
+        let minCosineDistance = compare(normArray1,flatRefImage)
         //console.log(cosineDistance)
-        let minCosineDistance = Math.min(...cosineDistance)
+        //let minCosineDistance = Math.min(...cosineDistance)
         if(minCosineDistance>0.4){
           console.log(`Bad Pose`)
         }else{
-          let index = cosineDistance.indexOf(minCosineDistance)
-          result = {pose:compareObj[index].pose,value:minCosineDistance}
           console.log(`Pose is ${compareObj[index].pose} and points ${minCosineDistance}`)
         }
         break;
