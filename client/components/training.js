@@ -41,7 +41,7 @@ const SelectTrainingPose = props => {
                 }
               }}
             >
-              <button class="button-primary-outlined">{pose.name}</button>
+              <button className="button-primary-outlined">{pose.name}</button>
             </Link>
           </div>
         );

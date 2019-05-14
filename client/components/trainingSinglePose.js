@@ -34,7 +34,7 @@ class TrainingSinglePose extends React.Component {
         </div>
 
         <div className="cameraDiv">
-          <Camera pose={this.props.location.state} />
+          <Camera poseName={this.props.location.state} />
         </div>
       </div>
     );
