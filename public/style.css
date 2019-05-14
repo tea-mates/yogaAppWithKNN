@@ -16,6 +16,11 @@
   padding: 6px;
 }
 
+#demogif {
+  width: 200px;
+  height: 200px;
+}
+
 #videoNoShow {
   transform: scaleX(-1);
   -moz-transform: scaleX(-1);
@@ -112,6 +117,7 @@ body {
 
 .homepage {
   margin-top: 75px;
+  overflow: hidden;
 }
 
 .redBorder {

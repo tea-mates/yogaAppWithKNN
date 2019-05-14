@@ -9,22 +9,27 @@ class Home extends React.Component {
   render() {
     return (
       <div className="homepage">
-        <div>
-          <h1>Yog-I Says</h1>
-        </div>
-        <div>
-          {/* //placeholder for annimated demo */}
-          <img src="https://cdn.dribbble.com/users/919329/screenshots/2796076/better-yoga3-dribbble.gif" />
-        </div>
-        <br />
-        <div>
-          <Link to="/start">
-            <button className="button-warning">Start!</button>
-          </Link>
-          <Link to="/train">
-            <button className="button-warning">Training Mode</button>
-          </Link>
-          <br />
+        <div class="row">
+          <div className="card">
+            <h3 className="card-title">Demo</h3>
+            {/* //placeholder for annimated demo */}
+            <img
+              id="demogif"
+              src="https://cdn.dribbble.com/users/919329/screenshots/2796076/better-yoga3-dribbble.gif"
+            />
+          </div>
+          <div className="card">
+            <h3 className="card-title">Practice Mode</h3>
+            <Link to="/train">
+              <button className="button-warning">Train</button>
+            </Link>
+          </div>
+          <div className="card">
+            <h3 className="card-title">Game Mode</h3>
+            <Link to="/start">
+              <button className="button-warning">Play</button>
+            </Link>
+          </div>
           **Please allow the camera access**
         </div>
       </div>
