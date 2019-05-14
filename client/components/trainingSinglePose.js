@@ -24,6 +24,7 @@ class TrainingSinglePose extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <div className="countdownDiv">
@@ -36,10 +37,10 @@ class TrainingSinglePose extends React.Component {
           <Camera poseName={this.props.match.params.poseName} />
         </div>
         <div>
-        <p>poseName : {this.props.pose}</p>
-        {this.props.score > 0 ?
-          <p>Score : {parseInt((1 - this.props.score) * 100)}%</p> :
-          <p>Score : {this.props.score} </p>}
+          <p>poseName : {this.props.pose}</p>
+          {this.props.score > 0 ?
+          <p>Score : {parseInt((1-this.props.score)*100)}</p> :
+          <p>Score : 0</p>}
         </div>
       </div>
     );
