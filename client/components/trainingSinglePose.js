@@ -5,6 +5,7 @@ import { stop } from './Camera';
 import {connect} from 'react-redux'
 import store from '../store';
 import {reset} from '../store/trainer'
+import ResultPage from './ResultPage'
 
 class TrainingSinglePose extends React.Component {
   constructor(props) {
@@ -43,10 +44,24 @@ class TrainingSinglePose extends React.Component {
           </div>}
         </div> :
         <div>
-          <p>poseName : {this.props.pose}</p>
+          <p>pose name : {this.props.pose}</p>
           {this.props.score > 0 ?
-          <p>Score : {parseInt((1-this.props.score)*100)}%</p> :
-          <p>Score : 0</p>}
+          <div>
+            <div>
+              <p>Score : {parseInt((1-this.props.score)*100)}%</p>
+            </div>
+            <div>
+              <ResultPage percentage = {parseInt((1-this.props.score)*100)}/>
+            </div>
+          </div> :
+          <div>
+            <div>
+              <p>Score : 0</p>
+            </div>
+            <div>
+              <ResultPage percentage = {0}/>
+            </div>
+          </div>}
         </div>}
       </div>
     );
