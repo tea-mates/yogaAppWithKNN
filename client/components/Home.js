@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 class Home extends React.Component {
   constructor() {
@@ -10,7 +10,7 @@ class Home extends React.Component {
     return (
       <div className="homepage" align="center">
         **Please allow the camera access**
-        <div class="row">
+        <div className="row">
           <div className="col col-lg-1" />
           <div className="col col-lg-3" className="boxed">
             <h3 className="card-title">Practice Mode</h3>
