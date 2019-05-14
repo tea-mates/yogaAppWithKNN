@@ -73,7 +73,8 @@ class PoseNet extends Component {
       this.canvas,
       poseDetectionFrame,
       this.posenet,
-      this.video
+      this.video,
+      this.props.poseName.pose
     );
     setTimeout(toggleStop, 11000);
   }
