@@ -143,5 +143,3 @@ export default connect(
 export function toggleStop() {
   stop = true;
 }
-
-// export default PoseNet;
