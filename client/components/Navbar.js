@@ -14,7 +14,7 @@ export const Navbar = props => {
           </div>
           <ul className="nav-links">
             <li>
-              <Link to="/aboutus">About</Link>
+              <Link to="/aboutus">About Us</Link>
             </li>
             <li>
               <Link to="/">Home</Link>
