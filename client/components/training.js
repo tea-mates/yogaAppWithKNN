@@ -9,7 +9,7 @@ const poses = [
     select: ''
   },
   {
-    name: 'HalfMoonPose',
+    name: 'ShivaTwist',
     imageUrl: 'https://i.imgur.com/VKn1Z7q.png',
     select: ''
   },
@@ -31,7 +31,7 @@ const SelectTrainingPose = props => {
     <div className="row">
       {poses.map((pose, i) => {
         return (
-          <div className="col col-lg-6">
+          <div key={i} className="col col-lg-6">
             <img className="trainingImage" id={i} src={pose.imageUrl} />
             <Link
               to={{
