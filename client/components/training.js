@@ -33,14 +33,15 @@ const SelectTrainingPose = props => {
         return (
           <div key={i} className="col col-lg-6">
             <img className="trainingImage" id={i} src={pose.imageUrl} />
-            <Link
+            {/* <Link
               to={{
                 pathname: '/singlePose',
                 state: {
                   pose: pose.name
                 }
               }}
-            >
+            > */}
+            <Link to={`/train/${pose.name}`}>
               <button className="button-primary-outlined">{pose.name}</button>
             </Link>
           </div>
