@@ -1,67 +1,53 @@
 import React from 'react';
-import { Button } from './Buttons';
-import Camera from './Camera';
-import AllPoses from './AllPoses';
-import CountdownTimer from './CountdownTimer';
+import { Link } from 'react-router-dom';
 
-class SelectPose extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      countdown: true,
-      loadCamera: false,
-    };
-    this.displayCamera = this.displayCamera.bind(this);
-    this.disableCountdown = this.disableCountdown.bind(this);
-    this.scrollToMyRef = this.scrollToMyRef.bind(this);
-    this.myRef = React.createRef();
+const poses = [
+  {
+    name: 'MountainPose', //the images need to be updated
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Mr-yoga-mountain-pose-bound_hands.jpg/747px-Mr-yoga-mountain-pose-bound_hands.jpg',
+    select: ''
+  },
+  {
+    name: 'HalfMoonPose',
+    imageUrl: 'https://i.imgur.com/VKn1Z7q.png',
+    select: ''
+  },
+  {
+    name: 'GarlandPose',
+    imageUrl: 'https://i.imgur.com/16JLzA4.png',
+    select: ''
+  },
+  {
+    name: 'TreePose', //the images need to be updated
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Tree_pose.JPG/428px-Tree_pose.JPG',
+    select: ''
   }
+];
 
-  async componentDidMount() {
-    await setTimeout(this.displayCamera, 8000);
-  }
+const SelectTrainingPose = props => {
+  return (
+    <div className="row">
+      {poses.map((pose, i) => {
+        return (
+          <div className="col col-lg-6">
+            <img className="trainingImage" id={i} src={pose.imageUrl} />
+            <Link
+              to={{
+                pathname: '/singlePose',
+                state: {
+                  pose: pose.name
+                }
+              }}
+            >
+              <button class="button-primary-outlined">{pose.name}</button>
+            </Link>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
-  displayCamera() {
-    console.log('lets begin!');
-    this.setState({ loadCamera: true });
-    setTimeout(this.disableCountdown, 3000);
-  }
-
-  disableCountdown() {
-    console.log('all done!');
-    this.setState({ countdown: false });
-    this.scrollToMyRef();
-  }
-
-  scrollToMyRef() {
-    this.myRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-      inline: 'end',
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <div className="countdownDiv">
-          {this.state.countdown ? (
-            <CountdownTimer />
-          ) : (
-            <div>
-              <h1>Go!</h1>
-            </div>
-          )}
-        </div>
-        <div className="allPosesDiv">
-          <AllPoses />
-        </div>
-        <div className="cameraDiv" ref={this.myRef}>
-          {this.state.loadCamera ? <Camera /> : <div />}
-        </div>
-      </div>
-    );
-  }
-}
-
-export default SelectPose;
+export default SelectTrainingPose;

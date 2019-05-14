@@ -21,7 +21,7 @@ class Home extends React.Component {
           <Link to="/start">
             <button className="button-warning">Start!</button>
           </Link>
-          <Link to="/training">
+          <Link to="/train">
             <button className="button-warning">Training Mode</button>
           </Link>
           <br />
