@@ -7,7 +7,7 @@ const AboutUs = () => {
       <div className="row align-center">
         <div className="col col-md-6">
           <div className="card">
-            <h3 class="card-title">Janavi</h3>
+            <h3 className="card-title">Janavi</h3>
             <div>
               <img
                 className="aboutUsImage"
@@ -32,7 +32,7 @@ const AboutUs = () => {
         </div>
         <div className="col col-md-6">
           <div className="card">
-            <h3 class="card-title">Lily</h3>
+            <h3 className="card-title">Lily</h3>
             <div>
               <img
                 className="aboutUsImage"
@@ -53,7 +53,7 @@ const AboutUs = () => {
         </div>
         <div className="col col-md-6">
           <div className="card">
-            <h3 class="card-title">Priyanka</h3>
+            <h3 className="card-title">Priyanka</h3>
             <div>
               <img
                 className="aboutUsImage"
@@ -78,7 +78,7 @@ const AboutUs = () => {
         </div>
         <div className="col col-md-6">
           <div className="card">
-            <h3 class="card-title">Sandra</h3>
+            <h3 className="card-title">Sandra</h3>
             <div>
               <img
                 className="aboutUsImage"
