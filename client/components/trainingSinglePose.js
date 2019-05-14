@@ -1,7 +1,8 @@
 import React from 'react';
-
 import CountdownTimer from './CountdownTimer';
 import Camera from './Camera';
+import { stop } from './Camera';
+import {connect} from 'react-redux'
 
 class TrainingSinglePose extends React.Component {
   constructor(props) {
@@ -23,7 +24,6 @@ class TrainingSinglePose extends React.Component {
   }
 
   render() {
-    console.log(this.props.location.state);
     return (
       <div>
         <div className="countdownDiv">
@@ -32,13 +32,23 @@ class TrainingSinglePose extends React.Component {
             <CountdownTimer />
           </div>
         </div>
-
         <div className="cameraDiv">
-          <Camera poseName={this.props.location.state} />
+          <Camera poseName={this.props.match.params.poseName} />
+        </div>
+        <div>
+        <p>poseName : {this.props.pose}</p>
+        {this.props.score > 0 ?
+          <p>Score : {parseInt((1 - this.props.score) * 100)}%</p> :
+          <p>Score : {this.props.score} </p>}
         </div>
       </div>
     );
   }
 }
 
-export default TrainingSinglePose;
+const mapState = (state)=>({
+  pose: state.resultReducer.pose,
+  score: state.resultReducer.score
+})
+
+export default connect(mapState)(TrainingSinglePose);
