@@ -19,6 +19,7 @@
 #demogif {
   width: 200px;
   height: 200px;
+  padding: 5px;
 }
 
 #videoNoShow {
@@ -111,15 +112,24 @@
 }
 
 body {
-  background-image: url('http://www.kubikvirrey2.com/wp-content/uploads/2018/10/background-design-patterns-elegant-golden-pattern-background-design-download-free-vector-art-free.jpg');
+  background-image: url('https://i.imgur.com/X0rA4FH.png');
+
   min-height: 100%;
 }
 
 .homepage {
   margin-top: 75px;
-  overflow: hidden;
+  padding: 5px;
 }
 
 .redBorder {
-  border: solid 5px red;
+  border: solid 2px red;
+  margin: 10px;
+}
+
+.boxed {
+  border: solid 2px yellow;
+  margin: 30px;
+  padding: 30px;
+  background-color: white;
 }

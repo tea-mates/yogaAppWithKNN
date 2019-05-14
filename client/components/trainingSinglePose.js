@@ -14,7 +14,7 @@ class TrainingSinglePose extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(this.displayCamera, 8000);
+    setTimeout(this.displayCamera, 10000);
   }
 
   displayCamera() {
