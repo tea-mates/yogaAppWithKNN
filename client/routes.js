@@ -15,7 +15,7 @@ const Routes = () => {
       <Route exact path="/start" component={GameLandingPage} />
       <Route exact path="/result" component={Result} />
       <Route exact path="/train" component={SelectTrainingPose} />
-      <Route exact path="/singlepose" component={TrainingSinglePose} />
+      <Route exact path="/train/:poseName" component={TrainingSinglePose} />
     </Switch>
   );
 };
