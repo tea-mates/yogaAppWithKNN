@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
 import { detectPose, poseDetectionFrame } from '../poseNetFunc';
 import { connect } from 'react-redux';
+import { updateStop } from '../store/trainer'
+import store from '../store';
 
 let stream = null;
 export let stop = null;
@@ -43,12 +45,6 @@ class PoseNet extends Component {
     this.video = elem;
     // console.log("in getVideo fn this refers to: ", this);
   };
-
-  componentWillUnmount() {
-    let track = stream.getTracks()[0];
-    track.stop();
-    stop = true;
-  }
 
   async componentDidMount() {
     try {
@@ -106,6 +102,11 @@ class PoseNet extends Component {
         resolve(video);
       };
     });
+  }
+  componentWillUnmount() {
+    let track = stream.getTracks()[0];
+    track.stop();
+    stop = true;
   }
 
   render() {
