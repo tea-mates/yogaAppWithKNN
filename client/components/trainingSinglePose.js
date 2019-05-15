@@ -6,6 +6,7 @@ import store from '../store';
 import { reset } from '../store/trainer';
 import ResultPage from './ResultPage';
 
+
 class TrainingSinglePose extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +29,23 @@ class TrainingSinglePose extends React.Component {
   render() {
     return (
       <div>
-        {!this.props.stop ? (
+        {!this.props.stop ?
+        <div>
+          {!this.state.loadCamera ?
+          <div className="countdownDiv">
+            <div>
+              <h1>Get ready!</h1>
+              <CountdownTimer />
+            </div>
+          </div> :
+          <div className="cameraDiv">
+            {stop = null}
+            <Camera poseName={this.props.match.params.poseName} />
+          </div>}
+        </div> :
+        <div>
+          <p>pose name : {this.props.pose}</p>
+          {this.props.score > 0 && this.props.score <= 1 ?
           <div>
             {!this.state.loadCamera ? (
               <div className="countdownDiv">
@@ -47,7 +64,7 @@ class TrainingSinglePose extends React.Component {
               </div>
             )}
           </div>
-        ) : (
+         : (
           <div>
             <p>pose name : {this.props.pose}</p>
             {this.props.score > 0 ? (
