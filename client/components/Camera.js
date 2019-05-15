@@ -60,15 +60,16 @@ class PoseNet extends Component {
         this.setState({ loading: false });
       }, 200);
     }
-
-    this.detectPose(
-      this.props,
-      this.canvas,
-      poseDetectionFrame,
-      this.posenet,
-      this.video,
-      this.props.poseName
-    );
+    if(this.canvas){
+      this.detectPose(
+        this.props,
+        this.canvas,
+        poseDetectionFrame,
+        this.posenet,
+        this.video,
+        this.props.poseName,
+      );
+    }
     setTimeout(toggleStop, 11000);
   }
 
