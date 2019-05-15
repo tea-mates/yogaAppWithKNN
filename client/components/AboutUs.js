@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const AboutUs = () => {
   return (
@@ -39,7 +39,10 @@ const AboutUs = () => {
                 src="https://media.licdn.com/dms/image/C4E03AQGYX3hwLklyVw/profile-displayphoto-shrink_800_800/0?e=1562803200&v=beta&t=SYDi6aIbe3W-8WW4dfBy-6XLEjK8ENASM-sqlMTqZDA"
               />
             </div>
-            <p>I'm an autodidact that enjoys learning.</p>
+            <p>
+              I'm an autodidactic software engineer who has transitioned from
+              Education to Tech.
+            </p>
             <ul className="card-actions">
               <li>
                 <button className="button-warning">
