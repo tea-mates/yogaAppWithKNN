@@ -94,7 +94,7 @@ const Help =()=>{
         <div class="step">
             <p class="step-number">1</p>
             <p class="step-title">Step Number One</p>
-            <p> begin in mountain pose with hands on hips. Bend the right knee, lifting it slowly.</p>
+            <p> Begin in mountain pose with hands on hips. Bend the right knee, lifting it slowly.</p>
 
         </div>
         <div class="step">
