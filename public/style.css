@@ -89,10 +89,27 @@
   margin: 60 0 60 0;
 }
 
-.card {
+.aboutUsCard {
   overflow-wrap: initial;
-  overflow: scroll;
+  overflow: auto;
   height: 350px;
+  background-color: '';
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  /* word-wrap: break-word; */
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  margin: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(224,224,224,0.5);
+}
+
+
 }
 
 .button-warning > a {
@@ -139,18 +156,18 @@ body {
   top: 600px;
 }
 
-.container{
+.container {
   background: #ffd107;
   text-align: center;
   height: auto;
   width: 75%;
   line-height: 1.5;
-  margin : 5% 10% 10% 10%;
+  margin: 5% 10% 10% 10%;
   color: #424242;
 }
 
-#head{
-  margin-top:30px;
+#head {
+  margin-top: 30px;
 }
 .resultImage {
   max-width: 100px;
