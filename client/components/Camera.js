@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
 import { detectPose, poseDetectionFrame } from '../poseNetFunc';
 import { connect } from 'react-redux';
-import { updateStop } from '../store/trainer'
-import store from '../store';
 
 let stream = null;
 export let stop = null;
@@ -31,9 +29,7 @@ class PoseNet extends Component {
 
   constructor(props) {
     super(props, PoseNet.defaultProps);
-    this.state = {
-      flag: true,
-    };
+
     this.detectPose = detectPose.bind(this);
   }
 
@@ -48,6 +44,7 @@ class PoseNet extends Component {
 
   async componentDidMount() {
     try {
+      stop = null
       await this.setupCamera();
     } catch (error) {
       throw new Error(
@@ -112,14 +109,8 @@ class PoseNet extends Component {
   render() {
     return (
       <div>
-        {this.state.flag ? (
-          <div>
-            <video id="videoNoShow" playsInline ref={this.getVideo} />
-            <canvas className="webcam" ref={this.getCanvas} />
-          </div>
-        ) : (
-          <div>Result</div>
-        )}
+        <video id="videoNoShow" playsInline ref={this.getVideo} />
+        <canvas className="webcam" ref={this.getCanvas} />
       </div>
     );
   }
