@@ -54,10 +54,13 @@ export default function(props) {
           </div>
         )}
       </div>
+
       <div>
         <Link to="/train">
           <button> All Poses</button>
         </Link>
+        <br />
+        <br />
         <div>
           <SharingResults />
         </div>
