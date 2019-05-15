@@ -24,14 +24,12 @@ class PoseNet extends Component {
     imageScaleFactor: 0.5,
     skeletonColor: '#ffadea',
     skeletonLineWidth: 6,
-    loadingText: 'Loading...please be patient...',
+    loadingText: 'Loading...please be patient...'
   };
 
   constructor(props) {
     super(props, PoseNet.defaultProps);
-    this.state = {
-      flag: true,
-    };
+
     this.detectPose = detectPose.bind(this);
   }
 
@@ -44,14 +42,9 @@ class PoseNet extends Component {
     // console.log("in getVideo fn this refers to: ", this);
   };
 
-  componentWillUnmount() {
-    let track = stream.getTracks()[0];
-    track.stop();
-    stop = true;
-  }
-
   async componentDidMount() {
     try {
+      stop = null;
       await this.setupCamera();
     } catch (error) {
       throw new Error(
@@ -67,15 +60,16 @@ class PoseNet extends Component {
         this.setState({ loading: false });
       }, 200);
     }
-
-    this.detectPose(
-      this.props,
-      this.canvas,
-      poseDetectionFrame,
-      this.posenet,
-      this.video,
-      this.props.poseName
-    );
+    if(this.canvas){
+      this.detectPose(
+        this.props,
+        this.canvas,
+        poseDetectionFrame,
+        this.posenet,
+        this.video,
+        this.props.poseName,
+      );
+    }
     setTimeout(toggleStop, 11000);
   }
 
@@ -95,8 +89,8 @@ class PoseNet extends Component {
       video: {
         facingMode: 'user',
         width: videoWidth,
-        height: videoHeight,
-      },
+        height: videoHeight
+      }
     });
 
     video.srcObject = stream;
@@ -107,18 +101,17 @@ class PoseNet extends Component {
       };
     });
   }
+  componentWillUnmount() {
+    let track = stream.getTracks()[0];
+    track.stop();
+    stop = true;
+  }
 
   render() {
     return (
       <div>
-        {this.state.flag ? (
-          <div>
-            <video id="videoNoShow" playsInline ref={this.getVideo} />
-            <canvas className="webcam" ref={this.getCanvas} />
-          </div>
-        ) : (
-          <div>Result</div>
-        )}
+        <video id="videoNoShow" playsInline ref={this.getVideo} />
+        <canvas className="webcam" ref={this.getCanvas} />
       </div>
     );
   }
@@ -126,13 +119,13 @@ class PoseNet extends Component {
 
 const mapState = (state, ownProps) => ({
   countdown: state.gameReducer.countdown,
-  poseSequence: state.gameReducer.poseSequence,
+  poseSequence: state.gameReducer.poseSequence
 });
 
 const mapDispatch = dispatch => ({
   checkPoseSuccess: (result, confidence) =>
     dispatch(checkPoseSuccess(result, confidence)),
-  nextRound: poseSequence => dispatch(nextRound(poseSequence)),
+  nextRound: poseSequence => dispatch(nextRound(poseSequence))
 });
 
 export default connect(
@@ -143,5 +136,3 @@ export default connect(
 export function toggleStop() {
   stop = true;
 }
-
-// export default PoseNet;
