@@ -24,7 +24,7 @@ class PoseNet extends Component {
     imageScaleFactor: 0.5,
     skeletonColor: '#ffadea',
     skeletonLineWidth: 6,
-    loadingText: 'Loading...please be patient...',
+    loadingText: 'Loading...please be patient...'
   };
 
   constructor(props) {
@@ -44,7 +44,7 @@ class PoseNet extends Component {
 
   async componentDidMount() {
     try {
-      stop = null
+      stop = null;
       await this.setupCamera();
     } catch (error) {
       throw new Error(
@@ -89,8 +89,8 @@ class PoseNet extends Component {
       video: {
         facingMode: 'user',
         width: videoWidth,
-        height: videoHeight,
-      },
+        height: videoHeight
+      }
     });
 
     video.srcObject = stream;
@@ -119,13 +119,13 @@ class PoseNet extends Component {
 
 const mapState = (state, ownProps) => ({
   countdown: state.gameReducer.countdown,
-  poseSequence: state.gameReducer.poseSequence,
+  poseSequence: state.gameReducer.poseSequence
 });
 
 const mapDispatch = dispatch => ({
   checkPoseSuccess: (result, confidence) =>
     dispatch(checkPoseSuccess(result, confidence)),
-  nextRound: poseSequence => dispatch(nextRound(poseSequence)),
+  nextRound: poseSequence => dispatch(nextRound(poseSequence))
 });
 
 export default connect(

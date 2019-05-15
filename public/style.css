@@ -18,11 +18,9 @@
 }
 
 .webcam {
-  margin: 0 auto;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 6px;
- }
+  max-width: 700px;
+  padding: 10px;
+}
 
 #demogif {
   width: 200px;
@@ -84,7 +82,7 @@
 }
 
 #resultHeading {
-  padding: 30px;
+  padding: 10px;
 }
 
 .progress-bar {
@@ -137,7 +135,6 @@ body {
 }
 
 .cameraDiv {
-  position: relative;
   left: 700px;
   top: 600px;
 }
@@ -154,4 +151,8 @@ body {
 
 #head{
   margin-top:30px;
+}
+.resultImage {
+  max-width: 100px;
+  max-height: 100px;
 }
