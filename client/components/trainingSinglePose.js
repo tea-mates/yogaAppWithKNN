@@ -47,49 +47,22 @@ class TrainingSinglePose extends React.Component {
           <p>pose name : {this.props.pose}</p>
           {this.props.score > 0 && this.props.score <= 1 ?
           <div>
-            {!this.state.loadCamera ? (
-              <div className="countdownDiv">
-                <div>
-                  <h1>Get ready!</h1>
-                  <CountdownTimer />
-                </div>
-              </div>
-            ) : (
-              <div>
-                {(stop = null)}
-                <Camera
-                  className="trainingCamera"
-                  poseName={this.props.match.params.poseName}
-                />
-              </div>
-            )}
-          </div>
-         : (
+            <div>
+              <p>Score : {parseInt((1-this.props.score)*100)}%</p>
+            </div>
+            <div>
+              <ResultPage percentage = {parseInt((1-this.props.score)*100)}/>
+            </div>
+          </div> :
           <div>
-            <p>pose name : {this.props.pose}</p>
-            {this.props.score > 0 ? (
-              <div>
-                <div>
-                  <p>Score : {parseInt((1 - this.props.score) * 100)}%</p>
-                </div>
-                <div>
-                  <ResultPage
-                    percentage={parseInt((1 - this.props.score) * 100)}
-                  />
-                </div>
-              </div>
-            ) : (
-              <div>
-                <div>
-                  <p>Score : 0</p>
-                </div>
-                <div>
-                  <ResultPage percentage={0} />
-                </div>
-              </div>
-            )}
-          </div>
-        )}
+            <div>
+              <p>Score : 0</p>
+            </div>
+            <div>
+              <ResultPage percentage = {0}/>
+            </div>
+          </div>}
+        </div>}
       </div>
     );
   }

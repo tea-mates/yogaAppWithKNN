@@ -5,23 +5,25 @@ const poses = [
   {
     name: 'MountainPose', //the images need to be updated
     imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Mr-yoga-mountain-pose-bound_hands.jpg/747px-Mr-yoga-mountain-pose-bound_hands.jpg',
+      'https://www.yogapedia.com/images/uploads/792b80fd0c884040bbcfaf14656788f7.png',
     select: ''
   },
   {
     name: 'ShivaTwist',
-    imageUrl: 'https://i.imgur.com/VKn1Z7q.png',
+    imageUrl:
+      'https://www.yogapedia.com/images/uploads/b4034436-61fe-4af4-9254-0bdbedeacd8f.png',
     select: ''
   },
   {
     name: 'GarlandPose',
-    imageUrl: 'https://i.imgur.com/16JLzA4.png',
+    imageUrl:
+      'https://cdn.yogapedia.com/images/uploads/logo-trademark-alphabet-ampersand-text-silhouette.png',
     select: ''
   },
   {
     name: 'TreePose', //the images need to be updated
     imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Tree_pose.JPG/428px-Tree_pose.JPG',
+      'https://www.yogapedia.com/images/uploads/8182ced0e2784fc1b5737f8bda1de28a.png',
     select: ''
   }
 ];
