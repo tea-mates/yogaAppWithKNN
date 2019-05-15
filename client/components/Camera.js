@@ -29,9 +29,7 @@ class PoseNet extends Component {
 
   constructor(props) {
     super(props, PoseNet.defaultProps);
-    this.state = {
-      flag: true,
-    };
+
     this.detectPose = detectPose.bind(this);
   }
 
@@ -44,14 +42,9 @@ class PoseNet extends Component {
     // console.log("in getVideo fn this refers to: ", this);
   };
 
-  componentWillUnmount() {
-    let track = stream.getTracks()[0];
-    track.stop();
-    stop = true;
-  }
-
   async componentDidMount() {
     try {
+      stop = null
       await this.setupCamera();
     } catch (error) {
       throw new Error(
@@ -107,18 +100,17 @@ class PoseNet extends Component {
       };
     });
   }
+  componentWillUnmount() {
+    let track = stream.getTracks()[0];
+    track.stop();
+    stop = true;
+  }
 
   render() {
     return (
       <div>
-        {this.state.flag ? (
-          <div>
-            <video id="videoNoShow" playsInline ref={this.getVideo} />
-            <canvas className="webcam" ref={this.getCanvas} />
-          </div>
-        ) : (
-          <div>Result</div>
-        )}
+        <video id="videoNoShow" playsInline ref={this.getVideo} />
+        <canvas className="webcam" ref={this.getCanvas} />
       </div>
     );
   }
