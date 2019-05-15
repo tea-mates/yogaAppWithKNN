@@ -138,6 +138,20 @@ body {
   left: 700px;
   top: 600px;
 }
+
+.container{
+  background: #ffd107;
+  text-align: center;
+  height: auto;
+  width: 75%;
+  line-height: 1.5;
+  margin : 5% 10% 10% 10%;
+  color: #424242;
+}
+
+#head{
+  margin-top:30px;
+}
 .resultImage {
   max-width: 100px;
   max-height: 100px;
