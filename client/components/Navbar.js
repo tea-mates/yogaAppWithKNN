@@ -12,6 +12,8 @@ export const Navbar = props => {
               src="https://www.freefavicon.com/freefavicons/abstract/rainbow-lotus-flower-silhouette-no-background-152-246078.png"
             />
           </div>
+          <div id="appName">Yogi Says</div>
+
           <ul className="nav-links">
             <li>
               <Link to="/aboutus">About Us</Link>
