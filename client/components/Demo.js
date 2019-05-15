@@ -12,7 +12,7 @@ const Demo = () =>{
       <br/>
       <p>"Anyone who practices can obtain success in yoga but not one who is lazy. Constant practice alone is the secret of success." - Hatha Yoga Pradipika</p>
       <br />
-      <p>The above quotes are applicable for coding as well.Our team followed it and we are proud Software Engineers. This lead us to build this app and challenge ourself as well as the user to achieve the result. Let's not stop and keep going..</p>
+      <p>The above quotes are applicable for coding as well. Our team followed it and we are proud Software Engineers. This lead us to build this app and challenge ourself as well as the user to achieve the result. Let's not stop and keep going..</p>
       </div>
     </div>)
 }
