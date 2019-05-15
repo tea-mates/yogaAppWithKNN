@@ -6,6 +6,7 @@ import store from '../store';
 import {reset} from '../store/trainer'
 import ResultPage from './ResultPage'
 
+
 class TrainingSinglePose extends React.Component {
   constructor(props) {
     super(props);
@@ -45,7 +46,7 @@ class TrainingSinglePose extends React.Component {
         </div> :
         <div>
           <p>pose name : {this.props.pose}</p>
-          {this.props.score > 0 ?
+          {this.props.score > 0 && this.props.score <= 1 ?
           <div>
             <div>
               <p>Score : {parseInt((1-this.props.score)*100)}%</p>
