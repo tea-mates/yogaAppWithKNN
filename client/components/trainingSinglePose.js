@@ -1,7 +1,6 @@
 import React from 'react';
 import CountdownTimer from './CountdownTimer';
 import Camera from './Camera';
-import { stop } from './Camera';
 import {connect} from 'react-redux'
 import store from '../store';
 import {reset} from '../store/trainer'
@@ -40,6 +39,7 @@ class TrainingSinglePose extends React.Component {
             </div>
           </div> :
           <div className="cameraDiv">
+            {stop = null}
             <Camera poseName={this.props.match.params.poseName} />
           </div>}
         </div> :
