@@ -6,6 +6,7 @@ import GameLandingPage from './components/GameLandingPage';
 import SelectTrainingPose from './components/training';
 import TrainingSinglePose from './components/trainingSinglePose';
 import Demo from './components/Demo'
+import Help from './components/Help'
 
 const Routes = () => {
   return (
@@ -16,6 +17,7 @@ const Routes = () => {
       <Route exact path="/train" component={SelectTrainingPose} />
       <Route exact path="/demo" component={Demo} />
       <Route exact path="/train/:poseName" component={TrainingSinglePose} />
+      <Route exact path="/help" component={Help}/>
     </Switch>
   );
 };
