@@ -23,7 +23,6 @@ class TrainingSinglePose extends React.Component {
 
   displayCamera() {
     this.setState({ loadCamera: true });
-    setTimeout(this.disableCountdown, 3000);
   }
 
   render() {
@@ -68,7 +67,7 @@ class TrainingSinglePose extends React.Component {
   }
 }
 
-const mapState = (state)=>({
+const mapState = state => ({
   pose: state.resultReducer.pose,
   score: state.resultReducer.score,
   stop:state.resultReducer.stop
