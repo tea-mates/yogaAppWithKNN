@@ -37,20 +37,7 @@ class Home extends React.Component {
           </div>
 
           <div className="col col-lg-3" className="boxedGame">
-            {/* <img className="game-card" src="https://i.imgur.com/eo5XD5k.png" /> */}
-
-            <h3 className="card-title" />
-            <img className="game-card" src="https://i.imgur.com/eo5XD5k.png" />
-
-            {/* <h3 className="card-title">Game Mode</h3>
-            <img
-              id="demogif"
-              src="https://cdn3.iconfinder.com/data/icons/retro-tech/60/Retro_Tech_-_Flat_-_054_-_Simon_Says-512.png"
-            />
-            <br />
-            <Link to="/start">
-              <button className="button-warning">Play</button>
-            </Link> */}
+            <img className="game-card" src="https://i.imgur.com/id7JeTI.png" />
           </div>
         </div>
       </div>
