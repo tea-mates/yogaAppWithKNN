@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
   constructor() {
@@ -43,9 +43,8 @@ class Home extends React.Component {
               src="https://cdn3.iconfinder.com/data/icons/retro-tech/60/Retro_Tech_-_Flat_-_054_-_Simon_Says-512.png"
             />
             <br />
-            <Link to="/start">
-              <button className="button-warning">Play</button>
-            </Link>
+
+            <img src="https://i.imgur.com/kMEevRG.png" />
           </div>
         </div>
       </div>
