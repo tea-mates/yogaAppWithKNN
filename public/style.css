@@ -20,6 +20,7 @@
 .webcam {
   max-width: 700px;
   padding: 10px;
+  margin-right: 50px;
 }
 
 #demogif {
@@ -172,6 +173,12 @@ body {
 }
 
 .countdown {
-  font-size: 50px;
+  font-size: 75px;
   color: red;
+}
+
+.referImg{
+  width:200px;
+  height:400px;
+  padding-top:30px;
 }

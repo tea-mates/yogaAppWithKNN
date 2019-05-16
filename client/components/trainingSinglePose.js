@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import store from '../store';
 import { reset } from '../store/trainer';
 import ResultPage from './ResultPage';
+import {poses} from './training'
 
 class TrainingSinglePose extends React.Component {
   constructor(props) {
@@ -26,6 +27,12 @@ class TrainingSinglePose extends React.Component {
   }
 
   render() {
+    let poseUrl = poses.filter(pose=>{
+      if(pose.name === this.props.match.params.poseName){
+        return pose
+      }
+    })
+    console.log(poseUrl)
     return (
       <div>
         {!this.props.stop ? (
@@ -33,7 +40,7 @@ class TrainingSinglePose extends React.Component {
             {!this.state.loadCamera ? (
               <div className="countdownDiv">
                 <div>
-                  <h1>Get ready!</h1>
+                  <h1>Breathe! Stretch! Flex!</h1>
                   <br />
                   <CountdownTimer />
                 </div>
@@ -42,10 +49,17 @@ class TrainingSinglePose extends React.Component {
               <div className="cameraDiv">
                 {(stop = null)}
                 <br />
-                <h1>Do the {this.props.match.params.poseName}!</h1>
+                <h1>Hold the: {this.props.match.params.poseName}!</h1>
                 <br />
                 <CountdownTimer />
-                <Camera poseName={this.props.match.params.poseName} />
+                <div className = 'row'>
+                  <div className = 'col col-lg-4'>
+                    <img src={poseUrl[0].imageUrl} class='referImg'/>
+                  </div>
+                  <div className = 'col col-lg-8'>
+                    <Camera poseName={this.props.match.params.poseName} />
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -53,9 +67,9 @@ class TrainingSinglePose extends React.Component {
           <div>
             <br />
             {this.props.pose === 'BadPose' ? (
-              <h1>Check out the Help section and keep practicing!</h1>
+              <h1>Check out the help section and keep practicing!</h1>
             ) : (
-              <h1>You mastered pose: {this.props.pose}! Check out the game!</h1>
+              <h1>You mastered the: {this.props.pose}! The Game mode is coming soon!</h1>
             )}
 
             {this.props.score > 0 && this.props.score <= 1 ? (

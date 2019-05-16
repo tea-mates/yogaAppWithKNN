@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const poses = [
+export const poses = [
   {
     name: 'MountainPose', //the images need to be updated
     imageUrl:
