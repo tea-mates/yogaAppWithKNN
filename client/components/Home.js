@@ -39,8 +39,13 @@ class Home extends React.Component {
             </div>
           </div>
 
-          <div className="col col-lg-3" className="boxedGame">
-            <img className="game-card" src="https://i.imgur.com/id7JeTI.png" />
+          <div className="col col-lg-4">
+            <div className="boxed">
+              <img
+                className="game-card"
+                src="https://i.imgur.com/id7JeTI.png"
+              />
+            </div>
           </div>
         </div>
       </div>
