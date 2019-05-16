@@ -10,7 +10,7 @@
 }
 
 #appName {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-style: oblique;
   font-weight: bold;
   font-size: x-large;
@@ -93,7 +93,7 @@
   overflow-wrap: initial;
   overflow: auto;
   height: 350px;
-  background-color: "";
+  background-color: '';
   position: relative;
   display: -ms-flexbox;
   display: flex;
@@ -126,7 +126,7 @@
 }
 
 body {
-  background-image: url("https://i.imgur.com/X0rA4FH.png");
+  background-image: url('https://i.imgur.com/X0rA4FH.png');
 
   min-height: 100%;
 }
@@ -146,6 +146,18 @@ body {
   margin: 30px;
   padding: 30px;
   background-color: white;
+  align-items: flex-start;
+}
+
+.boxedGame {
+  display: flex;
+  border: solid 2px yellow;
+  margin: 30px;
+  padding: 15px;
+  background-color: white;
+  align-items: flex-start;
+  width: 270px;
+  justify-content: center;
 }
 
 .cameraDiv {
@@ -174,4 +186,8 @@ body {
 .countdown {
   font-size: 50px;
   color: red;
+}
+
+.game-card {
+  height: 315px;
 }
