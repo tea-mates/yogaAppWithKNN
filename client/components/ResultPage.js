@@ -61,9 +61,7 @@ export default function(props) {
         </Link>
         <br />
         <br />
-        <div>
-          <SharingResults />
-        </div>
+        <div>{/* <SharingResults /> */}</div>
       </div>
     </div>
   );
