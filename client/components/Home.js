@@ -27,7 +27,6 @@ class Home extends React.Component {
           <div className="col col-lg-4">
             <div className="boxed">
               <h3 className="card-title">Demo</h3>
-              {/* //placeholder for animated demo */}
               <img
                 id="demogif"
                 src="https://cdn.dribbble.com/users/919329/screenshots/2796076/better-yoga3-dribbble.gif"
